@@ -33,38 +33,38 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbModel = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.label5 = new System.Windows.Forms.Label();
+            this.cbResolution = new System.Windows.Forms.ComboBox();
+            this.radioJPG = new System.Windows.Forms.RadioButton();
+            this.radioBMP = new System.Windows.Forms.RadioButton();
+            this.radioPNG = new System.Windows.Forms.RadioButton();
+            this.tbCompress = new System.Windows.Forms.TrackBar();
+            this.labelCompress = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioTimeAsFileName = new System.Windows.Forms.RadioButton();
+            this.radioAutoFilename = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.editPre1 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.editPre2 = new System.Windows.Forms.TextBox();
+            this.btnDefault = new System.Windows.Forms.Button();
+            this.btnVideoConfig = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbCompress)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.trackBar1);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.tbCompress);
+            this.groupBox1.Controls.Add(this.radioPNG);
+            this.groupBox1.Controls.Add(this.radioBMP);
+            this.groupBox1.Controls.Add(this.radioJPG);
+            this.groupBox1.Controls.Add(this.cbResolution);
+            this.groupBox1.Controls.Add(this.cbModel);
+            this.groupBox1.Controls.Add(this.labelCompress);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label4);
@@ -104,13 +104,13 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "图片压缩：";
             // 
-            // comboBox1
+            // cbModel
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(162, 36);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 32);
-            this.comboBox1.TabIndex = 1;
+            this.cbModel.FormattingEnabled = true;
+            this.cbModel.Location = new System.Drawing.Point(162, 36);
+            this.cbModel.Name = "cbModel";
+            this.cbModel.Size = new System.Drawing.Size(121, 32);
+            this.cbModel.TabIndex = 1;
             // 
             // label4
             // 
@@ -121,69 +121,69 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "分辨率：";
             // 
-            // comboBox2
+            // cbResolution
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(396, 36);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(154, 32);
-            this.comboBox2.TabIndex = 1;
+            this.cbResolution.FormattingEnabled = true;
+            this.cbResolution.Location = new System.Drawing.Point(396, 36);
+            this.cbResolution.Name = "cbResolution";
+            this.cbResolution.Size = new System.Drawing.Size(154, 32);
+            this.cbResolution.TabIndex = 1;
             // 
-            // radioButton1
+            // radioJPG
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(163, 103);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(81, 29);
-            this.radioButton1.TabIndex = 2;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "*.JPG";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioJPG.AutoSize = true;
+            this.radioJPG.Location = new System.Drawing.Point(163, 103);
+            this.radioJPG.Name = "radioJPG";
+            this.radioJPG.Size = new System.Drawing.Size(81, 29);
+            this.radioJPG.TabIndex = 2;
+            this.radioJPG.TabStop = true;
+            this.radioJPG.Text = "*.JPG";
+            this.radioJPG.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // radioBMP
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(283, 103);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(90, 29);
-            this.radioButton2.TabIndex = 2;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "*.BMP";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioBMP.AutoSize = true;
+            this.radioBMP.Location = new System.Drawing.Point(283, 103);
+            this.radioBMP.Name = "radioBMP";
+            this.radioBMP.Size = new System.Drawing.Size(90, 29);
+            this.radioBMP.TabIndex = 2;
+            this.radioBMP.TabStop = true;
+            this.radioBMP.Text = "*.BMP";
+            this.radioBMP.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // radioPNG
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(410, 103);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(88, 29);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "*.PNG";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioPNG.AutoSize = true;
+            this.radioPNG.Location = new System.Drawing.Point(410, 103);
+            this.radioPNG.Name = "radioPNG";
+            this.radioPNG.Size = new System.Drawing.Size(88, 29);
+            this.radioPNG.TabIndex = 2;
+            this.radioPNG.TabStop = true;
+            this.radioPNG.Text = "*.PNG";
+            this.radioPNG.UseVisualStyleBackColor = true;
             // 
-            // trackBar1
+            // tbCompress
             // 
-            this.trackBar1.Location = new System.Drawing.Point(163, 170);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(335, 56);
-            this.trackBar1.TabIndex = 3;
+            this.tbCompress.Location = new System.Drawing.Point(163, 170);
+            this.tbCompress.Name = "tbCompress";
+            this.tbCompress.Size = new System.Drawing.Size(335, 56);
+            this.tbCompress.TabIndex = 3;
             // 
-            // label5
+            // labelCompress
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(499, 170);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 25);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "80%";
+            this.labelCompress.AutoSize = true;
+            this.labelCompress.Location = new System.Drawing.Point(509, 170);
+            this.labelCompress.Name = "labelCompress";
+            this.labelCompress.Size = new System.Drawing.Size(51, 25);
+            this.labelCompress.TabIndex = 0;
+            this.labelCompress.Text = "80%";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Controls.Add(this.radioButton5);
-            this.groupBox2.Controls.Add(this.radioButton6);
+            this.groupBox2.Controls.Add(this.editPre2);
+            this.groupBox2.Controls.Add(this.editPre1);
+            this.groupBox2.Controls.Add(this.radioTimeAsFileName);
+            this.groupBox2.Controls.Add(this.radioAutoFilename);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -194,27 +194,27 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "保存配置";
             // 
-            // radioButton5
+            // radioTimeAsFileName
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(54, 122);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(185, 29);
-            this.radioButton5.TabIndex = 2;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "拍摄时间为文件名";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioTimeAsFileName.AutoSize = true;
+            this.radioTimeAsFileName.Location = new System.Drawing.Point(54, 122);
+            this.radioTimeAsFileName.Name = "radioTimeAsFileName";
+            this.radioTimeAsFileName.Size = new System.Drawing.Size(185, 29);
+            this.radioTimeAsFileName.TabIndex = 2;
+            this.radioTimeAsFileName.TabStop = true;
+            this.radioTimeAsFileName.Text = "拍摄时间为文件名";
+            this.radioTimeAsFileName.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // radioAutoFilename
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(54, 52);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(147, 29);
-            this.radioButton6.TabIndex = 2;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "自定义文件名";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioAutoFilename.AutoSize = true;
+            this.radioAutoFilename.Location = new System.Drawing.Point(54, 52);
+            this.radioAutoFilename.Name = "radioAutoFilename";
+            this.radioAutoFilename.Size = new System.Drawing.Size(147, 29);
+            this.radioAutoFilename.TabIndex = 2;
+            this.radioAutoFilename.TabStop = true;
+            this.radioAutoFilename.Text = "自定义文件名";
+            this.radioAutoFilename.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -225,12 +225,12 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "前缀：";
             // 
-            // textBox1
+            // editPre1
             // 
-            this.textBox1.Location = new System.Drawing.Point(321, 53);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(99, 31);
-            this.textBox1.TabIndex = 3;
+            this.editPre1.Location = new System.Drawing.Point(321, 53);
+            this.editPre1.Name = "editPre1";
+            this.editPre1.Size = new System.Drawing.Size(99, 31);
+            this.editPre1.TabIndex = 3;
             // 
             // label6
             // 
@@ -241,51 +241,51 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "+";
             // 
-            // textBox2
+            // editPre2
             // 
-            this.textBox2.Location = new System.Drawing.Point(461, 53);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(99, 31);
-            this.textBox2.TabIndex = 3;
+            this.editPre2.Location = new System.Drawing.Point(461, 53);
+            this.editPre2.Name = "editPre2";
+            this.editPre2.Size = new System.Drawing.Size(99, 31);
+            this.editPre2.TabIndex = 3;
             // 
-            // button4
+            // btnDefault
             // 
-            this.button4.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button4.Location = new System.Drawing.Point(56, 484);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(98, 33);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "默认设置";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnDefault.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDefault.Location = new System.Drawing.Point(56, 484);
+            this.btnDefault.Name = "btnDefault";
+            this.btnDefault.Size = new System.Drawing.Size(98, 33);
+            this.btnDefault.TabIndex = 2;
+            this.btnDefault.Text = "默认设置";
+            this.btnDefault.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnVideoConfig
             // 
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(369, 485);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 33);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "视频设置";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnVideoConfig.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnVideoConfig.Location = new System.Drawing.Point(369, 485);
+            this.btnVideoConfig.Name = "btnVideoConfig";
+            this.btnVideoConfig.Size = new System.Drawing.Size(98, 33);
+            this.btnVideoConfig.TabIndex = 2;
+            this.btnVideoConfig.Text = "视频设置";
+            this.btnVideoConfig.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnSave
             // 
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(473, 485);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 33);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "保存";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.Location = new System.Drawing.Point(473, 485);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(98, 33);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "保存";
+            this.btnSave.UseVisualStyleBackColor = true;
             // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(630, 567);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnVideoConfig);
+            this.Controls.Add(this.btnDefault);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -293,7 +293,7 @@
             this.Text = "系统设置";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbCompress)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -306,23 +306,23 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbResolution;
+        private System.Windows.Forms.ComboBox cbModel;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RadioButton radioPNG;
+        private System.Windows.Forms.RadioButton radioBMP;
+        private System.Windows.Forms.RadioButton radioJPG;
+        private System.Windows.Forms.TrackBar tbCompress;
+        private System.Windows.Forms.Label labelCompress;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioTimeAsFileName;
+        private System.Windows.Forms.RadioButton radioAutoFilename;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox editPre2;
+        private System.Windows.Forms.TextBox editPre1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnDefault;
+        private System.Windows.Forms.Button btnVideoConfig;
+        private System.Windows.Forms.Button btnSave;
     }
 }

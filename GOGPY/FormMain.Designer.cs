@@ -32,21 +32,21 @@
             this.picPreview = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tbExposure = new System.Windows.Forms.TrackBar();
+            this.cbExposure = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.tbResultPath = new System.Windows.Forms.TextBox();
+            this.btnSetting = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.AutoAdjust = new System.Windows.Forms.RadioButton();
+            this.NoAdjust = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.radioGray = new System.Windows.Forms.RadioButton();
+            this.radioColor = new System.Windows.Forms.RadioButton();
+            this.radioBin = new System.Windows.Forms.RadioButton();
+            this.btnCapture = new System.Windows.Forms.Button();
+            this.btnConfig = new System.Windows.Forms.Button();
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -58,7 +58,7 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbExposure)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -104,29 +104,29 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "曝光度：";
             // 
-            // trackBar1
+            // tbExposure
             // 
-            this.trackBar1.Location = new System.Drawing.Point(1317, 56);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(192, 56);
-            this.trackBar1.TabIndex = 2;
+            this.tbExposure.Location = new System.Drawing.Point(1317, 56);
+            this.tbExposure.Name = "tbExposure";
+            this.tbExposure.Size = new System.Drawing.Size(192, 56);
+            this.tbExposure.TabIndex = 2;
             // 
-            // checkBox1
+            // cbExposure
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox1.Location = new System.Drawing.Point(1515, 55);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(74, 31);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "自动";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbExposure.AutoSize = true;
+            this.cbExposure.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbExposure.Location = new System.Drawing.Point(1515, 55);
+            this.cbExposure.Name = "cbExposure";
+            this.cbExposure.Size = new System.Drawing.Size(74, 31);
+            this.cbExposure.TabIndex = 3;
+            this.cbExposure.Text = "自动";
+            this.cbExposure.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.btnBrowse);
+            this.groupBox1.Controls.Add(this.btnSetting);
+            this.groupBox1.Controls.Add(this.tbResultPath);
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(1227, 93);
             this.groupBox1.Name = "groupBox1";
@@ -135,27 +135,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "图像存放位置";
             // 
-            // textBox1
+            // tbResultPath
             // 
-            this.textBox1.Location = new System.Drawing.Point(18, 41);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(326, 34);
-            this.textBox1.TabIndex = 0;
+            this.tbResultPath.Location = new System.Drawing.Point(18, 41);
+            this.tbResultPath.Name = "tbResultPath";
+            this.tbResultPath.Size = new System.Drawing.Size(326, 34);
+            this.tbResultPath.TabIndex = 0;
             // 
-            // button2
+            // btnSetting
             // 
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(187, 101);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 33);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "存储设置";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSetting.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSetting.Location = new System.Drawing.Point(187, 101);
+            this.btnSetting.Name = "btnSetting";
+            this.btnSetting.Size = new System.Drawing.Size(98, 33);
+            this.btnSetting.TabIndex = 1;
+            this.btnSetting.Text = "存储设置";
+            this.btnSetting.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.NoAdjust);
+            this.groupBox2.Controls.Add(this.AutoAdjust);
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(1227, 261);
             this.groupBox2.Name = "groupBox2";
@@ -164,33 +164,33 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "矫正方式";
             // 
-            // radioButton1
+            // AutoAdjust
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(31, 53);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(113, 31);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "自动矫正";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.AutoAdjust.AutoSize = true;
+            this.AutoAdjust.Location = new System.Drawing.Point(31, 53);
+            this.AutoAdjust.Name = "AutoAdjust";
+            this.AutoAdjust.Size = new System.Drawing.Size(113, 31);
+            this.AutoAdjust.TabIndex = 0;
+            this.AutoAdjust.TabStop = true;
+            this.AutoAdjust.Text = "自动矫正";
+            this.AutoAdjust.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // NoAdjust
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(180, 53);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(93, 31);
-            this.radioButton2.TabIndex = 0;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "不矫正";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.NoAdjust.AutoSize = true;
+            this.NoAdjust.Location = new System.Drawing.Point(180, 53);
+            this.NoAdjust.Name = "NoAdjust";
+            this.NoAdjust.Size = new System.Drawing.Size(93, 31);
+            this.NoAdjust.TabIndex = 0;
+            this.NoAdjust.TabStop = true;
+            this.NoAdjust.Text = "不矫正";
+            this.NoAdjust.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.radioButton5);
-            this.groupBox3.Controls.Add(this.radioButton3);
-            this.groupBox3.Controls.Add(this.radioButton4);
+            this.groupBox3.Controls.Add(this.radioBin);
+            this.groupBox3.Controls.Add(this.radioGray);
+            this.groupBox3.Controls.Add(this.radioColor);
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(1227, 438);
             this.groupBox3.Name = "groupBox3";
@@ -199,74 +199,74 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "拍摄类型";
             // 
-            // radioButton3
+            // radioGray
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(127, 46);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(73, 31);
-            this.radioButton3.TabIndex = 0;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "灰度";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioGray.AutoSize = true;
+            this.radioGray.Location = new System.Drawing.Point(127, 57);
+            this.radioGray.Name = "radioGray";
+            this.radioGray.Size = new System.Drawing.Size(73, 31);
+            this.radioGray.TabIndex = 0;
+            this.radioGray.TabStop = true;
+            this.radioGray.Text = "灰度";
+            this.radioGray.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // radioColor
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(31, 46);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(73, 31);
-            this.radioButton4.TabIndex = 0;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "彩色";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioColor.AutoSize = true;
+            this.radioColor.Location = new System.Drawing.Point(31, 57);
+            this.radioColor.Name = "radioColor";
+            this.radioColor.Size = new System.Drawing.Size(73, 31);
+            this.radioColor.TabIndex = 0;
+            this.radioColor.TabStop = true;
+            this.radioColor.Text = "彩色";
+            this.radioColor.UseVisualStyleBackColor = true;
             // 
-            // radioButton5
+            // radioBin
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(224, 46);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(73, 31);
-            this.radioButton5.TabIndex = 0;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "黑白";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioBin.AutoSize = true;
+            this.radioBin.Location = new System.Drawing.Point(224, 57);
+            this.radioBin.Name = "radioBin";
+            this.radioBin.Size = new System.Drawing.Size(73, 31);
+            this.radioBin.TabIndex = 0;
+            this.radioBin.TabStop = true;
+            this.radioBin.Text = "黑白";
+            this.radioBin.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnCapture
             // 
-            this.button3.AutoSize = true;
-            this.button3.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(1420, 618);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(134, 187);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "拍摄";
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnCapture.AutoSize = true;
+            this.btnCapture.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCapture.Image = ((System.Drawing.Image)(resources.GetObject("btnCapture.Image")));
+            this.btnCapture.Location = new System.Drawing.Point(1420, 618);
+            this.btnCapture.Name = "btnCapture";
+            this.btnCapture.Size = new System.Drawing.Size(134, 187);
+            this.btnCapture.TabIndex = 1;
+            this.btnCapture.Text = "拍摄";
+            this.btnCapture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCapture.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // btnConfig
             // 
-            this.button1.AutoSize = true;
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(1227, 618);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 187);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "设置";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnConfig.AutoSize = true;
+            this.btnConfig.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnConfig.Image = ((System.Drawing.Image)(resources.GetObject("btnConfig.Image")));
+            this.btnConfig.Location = new System.Drawing.Point(1227, 618);
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(134, 187);
+            this.btnConfig.TabIndex = 1;
+            this.btnConfig.Text = "设置";
+            this.btnConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConfig.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // btnBrowse
             // 
-            this.button4.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button4.Location = new System.Drawing.Point(63, 101);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(98, 33);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "浏览图像";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnBrowse.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnBrowse.Location = new System.Drawing.Point(63, 101);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(98, 33);
+            this.btnBrowse.TabIndex = 1;
+            this.btnBrowse.Text = "浏览图像";
+            this.btnBrowse.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -374,12 +374,12 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnConfig);
+            this.Controls.Add(this.btnCapture);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.cbExposure);
+            this.Controls.Add(this.tbExposure);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.picPreview);
@@ -388,7 +388,7 @@
             this.Name = "FormMain";
             this.Text = "GOGPY(2018年8月11日 jsxyhelu.cnblogs.com）";
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbExposure)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -415,21 +415,21 @@
         private System.Windows.Forms.PictureBox picPreview;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TrackBar tbExposure;
+        private System.Windows.Forms.CheckBox cbExposure;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnSetting;
+        private System.Windows.Forms.TextBox tbResultPath;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton NoAdjust;
+        private System.Windows.Forms.RadioButton AutoAdjust;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.RadioButton radioBin;
+        private System.Windows.Forms.RadioButton radioGray;
+        private System.Windows.Forms.RadioButton radioColor;
+        private System.Windows.Forms.Button btnCapture;
+        private System.Windows.Forms.Button btnConfig;
+        private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
