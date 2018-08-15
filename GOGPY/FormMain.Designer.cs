@@ -21,6 +21,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.picPreview = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,6 +51,8 @@
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.camtimer = new System.Windows.Forms.Timer(this.components);
+            this.picMain = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbExposure)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -65,6 +68,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMain)).BeginInit();
             this.SuspendLayout();
             // 
             // picPreview
@@ -261,6 +265,7 @@
             this.btnConfig.Text = "设置";
             this.btnConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConfig.UseVisualStyleBackColor = false;
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
             // 
             // pictureBox1
             // 
@@ -328,9 +333,9 @@
             // pictureBox8
             // 
             this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(642, 820);
+            this.pictureBox8.Location = new System.Drawing.Point(632, 820);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(138, 159);
+            this.pictureBox8.Size = new System.Drawing.Size(162, 159);
             this.pictureBox8.TabIndex = 9;
             this.pictureBox8.TabStop = false;
             // 
@@ -352,6 +357,20 @@
             this.pictureBox10.TabIndex = 13;
             this.pictureBox10.TabStop = false;
             // 
+            // camtimer
+            // 
+            this.camtimer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // picMain
+            // 
+            this.picMain.Image = ((System.Drawing.Image)(resources.GetObject("picMain.Image")));
+            this.picMain.Location = new System.Drawing.Point(800, 12);
+            this.picMain.Name = "picMain";
+            this.picMain.Size = new System.Drawing.Size(414, 376);
+            this.picMain.TabIndex = 5;
+            this.picMain.TabStop = false;
+            this.picMain.Visible = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -367,6 +386,7 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.picMain);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnConfig);
@@ -383,6 +403,7 @@
             this.Name = "FormMain";
             this.Text = "GOGPY(2018年8月11日 jsxyhelu.cnblogs.com）";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbExposure)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -401,6 +422,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -436,6 +458,8 @@
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.Timer camtimer;
+        private System.Windows.Forms.PictureBox picMain;
     }
 }
 

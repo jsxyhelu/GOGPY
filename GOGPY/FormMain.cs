@@ -8,6 +8,7 @@ using System.Data;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Diagnostics;
+using System.Threading;
 using GOClrDll;
 namespace GOGPY
 {
@@ -20,9 +21,10 @@ namespace GOGPY
         IntPtr m_ip = IntPtr.Zero;
         Image srcImage;
         GOCsharpHelper gocsharphelper = new GOCsharpHelper();
+  
         #endregion
-
       
+        #region 事件驱动
         public FormMain()
         {
             InitializeComponent();
@@ -30,8 +32,7 @@ namespace GOGPY
             const int VIDEOWIDTH = 640; // Depends on video device caps
             const int VIDEOHEIGHT = 480; // Depends on video device caps
             const int VIDEOBITSPERPIXEL = 24; // BitsPerPixel values determined by device
-
-            cam = new Capture(VIDEODEVICE, VIDEOWIDTH, VIDEOHEIGHT, VIDEOBITSPERPIXEL, picPreview);
+            cam = new Capture(VIDEODEVICE, VIDEOWIDTH, VIDEOHEIGHT, VIDEOBITSPERPIXEL, picMain);
         }
         /// <summary>
         /// Clean up any resources being used.
@@ -53,6 +54,95 @@ namespace GOGPY
                 m_ip = IntPtr.Zero;
             }
         }
+        private void btnCapture_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+
+            // Release any previous buffer
+            if (m_ip != IntPtr.Zero)
+            {
+                Marshal.FreeCoTaskMem(m_ip);
+                m_ip = IntPtr.Zero;
+            }
+
+            // capture image
+            m_ip = cam.Click();//click就是采集吗？
+            Bitmap b = new Bitmap(cam.Width, cam.Height, cam.Stride, PixelFormat.Format24bppRgb, m_ip);
+
+            // If the image is upsidedown
+            b.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            pictureBox1.Image = b;
+            //处理测试 3 8 7
+            srcImage = b;
+            if (pictureBox3.Image != null)
+                pictureBox3.Image.Dispose();
+            if (pictureBox8.Image != null)
+                pictureBox8.Image.Dispose();
+            if (pictureBox7.Image != null)
+                pictureBox7.Image.Dispose();
+
+            Image image0 = gocsharphelper.ImageProcess0(srcImage, iparam);
+            pictureBox3.Image = image0;
+            Image image1 = gocsharphelper.ImageProcess1(srcImage, iparam);
+            pictureBox8.Image = image1;
+            Image image2 = gocsharphelper.ImageProcess2(srcImage, iparam);
+            pictureBox7.Image = image2;
+
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cam.Dispose();
+
+            if (m_ip != IntPtr.Zero)
+            {
+                Marshal.FreeCoTaskMem(m_ip);
+                m_ip = IntPtr.Zero;
+            }
+
+            //ReloadAllUnits();
+            gocsharphelper.Clear();
+        }
+        
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+         
+        }
+
+        //尝试使用timer，解决实时显示问题
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            // Cursor.Current = Cursors.WaitCursor;
+
+            // Release any previous buffer
+            if (m_ip != IntPtr.Zero)
+            {
+                Marshal.FreeCoTaskMem(m_ip);
+                m_ip = IntPtr.Zero;
+            }
+
+            // capture image
+            m_ip = cam.Click();//click就是采集吗？
+            Bitmap b = new Bitmap(cam.Width, cam.Height, cam.Stride, PixelFormat.Format24bppRgb, m_ip);
+
+            // If the image is upsidedown
+            b.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            srcImage = b;
+            if (picPreview.Image != null)
+                picPreview.Image.Dispose();
+           
+            Image image0 = gocsharphelper.ImageProcess0(srcImage, iparam);
+            picPreview.Image = image0;
+
+        }
+
+        private void btnConfig_Click(object sender, EventArgs e)
+        {
+            camtimer.Enabled = true;
+        }
+        #endregion
+      
 
         #region 图像处理wraper
         class GOCsharpHelper
@@ -122,55 +212,10 @@ namespace GOGPY
         }
         #endregion
 
-        private void btnCapture_Click(object sender, EventArgs e)
-        {
-            Cursor.Current = Cursors.WaitCursor;
+     
 
-            // Release any previous buffer
-            if (m_ip != IntPtr.Zero)
-            {
-                Marshal.FreeCoTaskMem(m_ip);
-                m_ip = IntPtr.Zero;
-            }
+      
 
-            // capture image
-            m_ip = cam.Click();//click就是采集吗？
-            Bitmap b = new Bitmap(cam.Width, cam.Height, cam.Stride, PixelFormat.Format24bppRgb, m_ip);
-
-            // If the image is upsidedown
-            b.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            pictureBox1.Image = b;
-            //处理测试 3 8 7
-            srcImage = b;
-            if (pictureBox3.Image != null)
-                pictureBox3.Image.Dispose();
-            if (pictureBox8.Image != null)
-                pictureBox8.Image.Dispose();
-            if (pictureBox7.Image != null)
-                pictureBox7.Image.Dispose();
-
-            Image image0 = gocsharphelper.ImageProcess0(srcImage, iparam);
-            pictureBox3.Image = image0;
-            Image image1 = gocsharphelper.ImageProcess1(srcImage, iparam);
-            pictureBox8.Image = image1;
-            Image image2 = gocsharphelper.ImageProcess2(srcImage, iparam);
-            pictureBox7.Image = image2;
-
-            Cursor.Current = Cursors.Default;
-        }
-
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            cam.Dispose();
-
-            if (m_ip != IntPtr.Zero)
-            {
-                Marshal.FreeCoTaskMem(m_ip);
-                m_ip = IntPtr.Zero;
-            }
-
-            //ReloadAllUnits();
-            gocsharphelper.Clear();
-        }
+       
     }
 }
