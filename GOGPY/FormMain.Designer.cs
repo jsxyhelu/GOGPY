@@ -11,14 +11,7 @@
         /// 清理所有正在使用的资源。
         /// </summary>
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+     
 
         #region Windows 窗体设计器生成的代码
 
@@ -35,18 +28,18 @@
             this.tbExposure = new System.Windows.Forms.TrackBar();
             this.cbExposure = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbResultPath = new System.Windows.Forms.TextBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
+            this.tbResultPath = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.AutoAdjust = new System.Windows.Forms.RadioButton();
             this.NoAdjust = new System.Windows.Forms.RadioButton();
+            this.AutoAdjust = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioBin = new System.Windows.Forms.RadioButton();
             this.radioGray = new System.Windows.Forms.RadioButton();
             this.radioColor = new System.Windows.Forms.RadioButton();
-            this.radioBin = new System.Windows.Forms.RadioButton();
             this.btnCapture = new System.Windows.Forms.Button();
             this.btnConfig = new System.Windows.Forms.Button();
-            this.btnBrowse = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -135,12 +128,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "图像存放位置";
             // 
-            // tbResultPath
+            // btnBrowse
             // 
-            this.tbResultPath.Location = new System.Drawing.Point(18, 41);
-            this.tbResultPath.Name = "tbResultPath";
-            this.tbResultPath.Size = new System.Drawing.Size(326, 34);
-            this.tbResultPath.TabIndex = 0;
+            this.btnBrowse.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnBrowse.Location = new System.Drawing.Point(63, 101);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(98, 33);
+            this.btnBrowse.TabIndex = 1;
+            this.btnBrowse.Text = "浏览图像";
+            this.btnBrowse.UseVisualStyleBackColor = true;
             // 
             // btnSetting
             // 
@@ -151,6 +147,13 @@
             this.btnSetting.TabIndex = 1;
             this.btnSetting.Text = "存储设置";
             this.btnSetting.UseVisualStyleBackColor = true;
+            // 
+            // tbResultPath
+            // 
+            this.tbResultPath.Location = new System.Drawing.Point(18, 41);
+            this.tbResultPath.Name = "tbResultPath";
+            this.tbResultPath.Size = new System.Drawing.Size(326, 34);
+            this.tbResultPath.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -164,17 +167,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "矫正方式";
             // 
-            // AutoAdjust
-            // 
-            this.AutoAdjust.AutoSize = true;
-            this.AutoAdjust.Location = new System.Drawing.Point(31, 53);
-            this.AutoAdjust.Name = "AutoAdjust";
-            this.AutoAdjust.Size = new System.Drawing.Size(113, 31);
-            this.AutoAdjust.TabIndex = 0;
-            this.AutoAdjust.TabStop = true;
-            this.AutoAdjust.Text = "自动矫正";
-            this.AutoAdjust.UseVisualStyleBackColor = true;
-            // 
             // NoAdjust
             // 
             this.NoAdjust.AutoSize = true;
@@ -185,6 +177,17 @@
             this.NoAdjust.TabStop = true;
             this.NoAdjust.Text = "不矫正";
             this.NoAdjust.UseVisualStyleBackColor = true;
+            // 
+            // AutoAdjust
+            // 
+            this.AutoAdjust.AutoSize = true;
+            this.AutoAdjust.Location = new System.Drawing.Point(31, 53);
+            this.AutoAdjust.Name = "AutoAdjust";
+            this.AutoAdjust.Size = new System.Drawing.Size(113, 31);
+            this.AutoAdjust.TabIndex = 0;
+            this.AutoAdjust.TabStop = true;
+            this.AutoAdjust.Text = "自动矫正";
+            this.AutoAdjust.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -198,6 +201,17 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "拍摄类型";
+            // 
+            // radioBin
+            // 
+            this.radioBin.AutoSize = true;
+            this.radioBin.Location = new System.Drawing.Point(224, 57);
+            this.radioBin.Name = "radioBin";
+            this.radioBin.Size = new System.Drawing.Size(73, 31);
+            this.radioBin.TabIndex = 0;
+            this.radioBin.TabStop = true;
+            this.radioBin.Text = "黑白";
+            this.radioBin.UseVisualStyleBackColor = true;
             // 
             // radioGray
             // 
@@ -221,17 +235,6 @@
             this.radioColor.Text = "彩色";
             this.radioColor.UseVisualStyleBackColor = true;
             // 
-            // radioBin
-            // 
-            this.radioBin.AutoSize = true;
-            this.radioBin.Location = new System.Drawing.Point(224, 57);
-            this.radioBin.Name = "radioBin";
-            this.radioBin.Size = new System.Drawing.Size(73, 31);
-            this.radioBin.TabIndex = 0;
-            this.radioBin.TabStop = true;
-            this.radioBin.Text = "黑白";
-            this.radioBin.UseVisualStyleBackColor = true;
-            // 
             // btnCapture
             // 
             this.btnCapture.AutoSize = true;
@@ -244,6 +247,7 @@
             this.btnCapture.Text = "拍摄";
             this.btnCapture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCapture.UseVisualStyleBackColor = false;
+            this.btnCapture.Click += new System.EventHandler(this.btnCapture_Click);
             // 
             // btnConfig
             // 
@@ -257,16 +261,6 @@
             this.btnConfig.Text = "设置";
             this.btnConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConfig.UseVisualStyleBackColor = false;
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnBrowse.Location = new System.Drawing.Point(63, 101);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(98, 33);
-            this.btnBrowse.TabIndex = 1;
-            this.btnBrowse.Text = "浏览图像";
-            this.btnBrowse.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -387,6 +381,7 @@
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "GOGPY(2018年8月11日 jsxyhelu.cnblogs.com）";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbExposure)).EndInit();
             this.groupBox1.ResumeLayout(false);
