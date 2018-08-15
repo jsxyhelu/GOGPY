@@ -1,5 +1,15 @@
-﻿生成启动时间为 2018-08-15 17:52:49。
+﻿生成启动时间为 2018-08-16 06:32:29。
+     1>项目“E:\未来项目\GOGPY\主要程序\GOGPY\ClassLibrary1\ClassLibrary1.vcxproj”在节点 2 上(Build 个目标)。
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppBuild.targets(346,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+     1>Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\GOGPY\bin\Debug\GOClrClasslibrary.dll" /INCREMENTAL /NOLOGO opencv_world320d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"..\GOGPY\bin\Debug\GOClrClasslibrary.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /DLL Debug\app.res
+         Debug\AssemblyInfo.obj
+         Debug\GOClrDll.obj
+         Debug\Stdafx.obj
+         "Debug\.NETFramework,Version=v4.5.AssemblyAttributes.obj"
+         ClassLibrary1.vcxproj -> E:\未来项目\GOGPY\主要程序\GOGPY\ClassLibrary1\..\GOGPY\bin\Debug\GOClrClasslibrary.dll
+     1>已完成生成项目“E:\未来项目\GOGPY\主要程序\GOGPY\ClassLibrary1\ClassLibrary1.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:00.01
+已用时间 00:00:00.48

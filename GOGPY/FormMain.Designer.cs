@@ -242,7 +242,7 @@
             this.btnCapture.Image = ((System.Drawing.Image)(resources.GetObject("btnCapture.Image")));
             this.btnCapture.Location = new System.Drawing.Point(1420, 618);
             this.btnCapture.Name = "btnCapture";
-            this.btnCapture.Size = new System.Drawing.Size(134, 187);
+            this.btnCapture.Size = new System.Drawing.Size(178, 187);
             this.btnCapture.TabIndex = 1;
             this.btnCapture.Text = "拍摄";
             this.btnCapture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -256,7 +256,7 @@
             this.btnConfig.Image = ((System.Drawing.Image)(resources.GetObject("btnConfig.Image")));
             this.btnConfig.Location = new System.Drawing.Point(1227, 618);
             this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(134, 187);
+            this.btnConfig.Size = new System.Drawing.Size(184, 187);
             this.btnConfig.TabIndex = 1;
             this.btnConfig.Text = "设置";
             this.btnConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -356,7 +356,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1610, 991);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1607, 1045);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.pictureBox5);
