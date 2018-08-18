@@ -1,5 +1,5 @@
-﻿生成启动时间为 2018-08-18 07:31:20。
-     1>项目“E:\未来项目\GOGPY\主要程序\GOGPY\ClassLibrary1\ClassLibrary1.vcxproj”在节点 2 上(Build 个目标)。
+﻿生成启动时间为 2018-08-18 08:50:52。
+     1>项目“E:\未来项目\GOGPY\主要程序\GOGPY\ClassLibrary1\ClassLibrary1.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppBuild.targets(346,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
      1>ClCompile:
          D:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\GOClrClasslibrary.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib Stdafx.cpp
@@ -37,8 +37,8 @@
          Debug\Stdafx.obj
          "Debug\.NETFramework,Version=v4.5.AssemblyAttributes.obj"
          ClassLibrary1.vcxproj -> E:\未来项目\GOGPY\主要程序\GOGPY\ClassLibrary1\..\GOGPY\bin\Debug\GOClrClasslibrary.dll
-     1>已完成生成项目“E:\未来项目\GOGPY\主要程序\GOGPY\ClassLibrary1\ClassLibrary1.vcxproj”(Build 个目标)的操作。
+     1>已完成生成项目“E:\未来项目\GOGPY\主要程序\GOGPY\ClassLibrary1\ClassLibrary1.vcxproj”(Rebuild 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:02.59
+已用时间 00:00:02.35

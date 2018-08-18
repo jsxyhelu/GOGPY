@@ -30,7 +30,9 @@ namespace GOGPY
             IntPtr lpvReserved);
 
         IBaseFilter theDevice = null;
+        INIFileHelper inifilehelper = new INIFileHelper("./GOConfig");
 
+        public FormMain fatherForm;
         public FormConfig()
         {
             InitializeComponent();
@@ -38,10 +40,16 @@ namespace GOGPY
             {
                 comboBox1.Items.Add(ds.Name);
             }
-            //Select first combobox item
+            //读取数据库
+            string strtmp = inifilehelper.IniReadValue("视频采集", "摄像头序号");
+            int itmp = Convert.ToInt32(strtmp);
+            if(itmp > comboBox1.Items.Count)
+            {
+                itmp = 0;
+            }
             if (comboBox1.Items.Count > 0)
             {
-                comboBox1.SelectedIndex = 0;
+                comboBox1.SelectedIndex = itmp;
             }
         }
 
@@ -141,7 +149,26 @@ namespace GOGPY
             Marshal.FreeCoTaskMem(caGUID.pElems);
         }
 
+        //保存数据到数据持久层。这里的程序比较简单，就直接保存到ini中去
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            int itmp = comboBox1.SelectedIndex;
+            inifilehelper.IniWriteValue("视频采集", "摄像头序号", itmp.ToString());
 
-       
+            inifilehelper.IniWriteValue("图像参数", "摄像头序号", "empty");
+            inifilehelper.IniWriteValue("分辨率", "摄像头序号", "empty");
+            inifilehelper.IniWriteValue("图片格式", "摄像头序号", "empty");
+            inifilehelper.IniWriteValue("图片压缩", "摄像头序号", "empty");
+
+            inifilehelper.IniWriteValue("保存配置", "自定义文件名", "TRUE");
+            inifilehelper.IniWriteValue("保存配置", "前缀", "empty");
+            inifilehelper.IniWriteValue("保存配置", "后缀", "empty");
+
+            MessageBox.Show("配置保存成功!");
+
+            //强刷
+            fatherForm.InitVideoDevice();
+            this.Hide();
+        }
     }
 }

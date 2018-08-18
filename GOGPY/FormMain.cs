@@ -22,25 +22,40 @@ namespace GOGPY
         int iparam = 32;
         IntPtr m_ip = IntPtr.Zero;
         Image srcImage;
-        const int VIDEODEVICE = 1; // zero based index of video capture device to use
-        const int VIDEOWIDTH = 640; // Depends on video device caps
-        const int VIDEOHEIGHT = 480; // Depends on video device caps
-        const int VIDEOBITSPERPIXEL = 24; // BitsPerPixel values determined by device
+    
         GOCsharpHelper gocsharphelper = new GOCsharpHelper();
         FormConfig formconfig = new FormConfig();
+       
+        INIFileHelper inifilehelper = new INIFileHelper("./GOConfig");
         #endregion
       
         #region 事件驱动
         public FormMain()
         {
             InitializeComponent();
-            try 
+            //选择视频设备
+            InitVideoDevice();
+            //传值
+            formconfig.fatherForm = this;
+        }
+
+        //选择视频设备
+        public void InitVideoDevice()
+        {
+            try
             {
+                //读取参数
+                string strTmp = inifilehelper.IniReadValue("视频采集", "摄像头序号");
+                int VIDEODEVICE = Convert.ToInt32(strTmp); // zero based index of video capture device to use
+                const int VIDEOWIDTH = 640; // Depends on video device caps
+                const int VIDEOHEIGHT = 480; // Depends on video device caps
+                const int VIDEOBITSPERPIXEL = 24; // BitsPerPixel values determined by device
                 cam = new Capture(VIDEODEVICE, VIDEOWIDTH, VIDEOHEIGHT, VIDEOBITSPERPIXEL, picMain);
             }
             catch
             {
                 MessageBox.Show("摄像头打开错误，请首先确保摄像头连接并设置正确！");
+                formconfig.Visible = true;
             }
         }
         /// <summary>
@@ -144,7 +159,7 @@ namespace GOGPY
         //打开设置界面
         private void btnConfig_Click(object sender, EventArgs e)
         {
-            formconfig.ShowDialog();
+            formconfig.Visible = true;
         }
         #endregion
       

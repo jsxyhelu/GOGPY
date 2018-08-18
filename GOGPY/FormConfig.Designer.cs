@@ -265,7 +265,7 @@
             // btnVideoConfig
             // 
             this.btnVideoConfig.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnVideoConfig.Location = new System.Drawing.Point(339, 585);
+            this.btnVideoConfig.Location = new System.Drawing.Point(430, 40);
             this.btnVideoConfig.Name = "btnVideoConfig";
             this.btnVideoConfig.Size = new System.Drawing.Size(134, 33);
             this.btnVideoConfig.TabIndex = 2;
@@ -276,17 +276,19 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(479, 586);
+            this.btnSave.Location = new System.Drawing.Point(428, 574);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(134, 33);
             this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "保存";
+            this.btnSave.Text = "保存设置";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.comboBox1);
             this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.btnVideoConfig);
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(19, 7);
             this.groupBox3.Name = "groupBox3";
@@ -298,7 +300,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(227, 40);
+            this.comboBox1.Location = new System.Drawing.Point(192, 41);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(227, 32);
             this.comboBox1.TabIndex = 1;
@@ -307,7 +309,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(114, 43);
+            this.label5.Location = new System.Drawing.Point(79, 44);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(126, 25);
             this.label5.TabIndex = 0;
@@ -320,7 +322,6 @@
             this.ClientSize = new System.Drawing.Size(636, 649);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnVideoConfig);
             this.Controls.Add(this.btnDefault);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -329,6 +330,7 @@
             this.Name = "FormConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "系统设置";
+         
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbCompress)).EndInit();

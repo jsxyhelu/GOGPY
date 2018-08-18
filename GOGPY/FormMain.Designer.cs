@@ -369,7 +369,6 @@
             this.picMain.Size = new System.Drawing.Size(414, 376);
             this.picMain.TabIndex = 5;
             this.picMain.TabStop = false;
-            this.picMain.Visible = false;
             // 
             // FormMain
             // 
