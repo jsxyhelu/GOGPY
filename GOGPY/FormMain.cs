@@ -10,6 +10,8 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 using GOClrDll;
+using DirectShowLib;
+
 namespace GOGPY
 {
     public partial class FormMain : Form
@@ -20,19 +22,26 @@ namespace GOGPY
         int iparam = 32;
         IntPtr m_ip = IntPtr.Zero;
         Image srcImage;
+        const int VIDEODEVICE = 1; // zero based index of video capture device to use
+        const int VIDEOWIDTH = 640; // Depends on video device caps
+        const int VIDEOHEIGHT = 480; // Depends on video device caps
+        const int VIDEOBITSPERPIXEL = 24; // BitsPerPixel values determined by device
         GOCsharpHelper gocsharphelper = new GOCsharpHelper();
-  
+        FormConfig formconfig = new FormConfig();
         #endregion
       
         #region 事件驱动
         public FormMain()
         {
             InitializeComponent();
-            const int VIDEODEVICE = 0; // zero based index of video capture device to use
-            const int VIDEOWIDTH = 640; // Depends on video device caps
-            const int VIDEOHEIGHT = 480; // Depends on video device caps
-            const int VIDEOBITSPERPIXEL = 24; // BitsPerPixel values determined by device
-            cam = new Capture(VIDEODEVICE, VIDEOWIDTH, VIDEOHEIGHT, VIDEOBITSPERPIXEL, picMain);
+            try 
+            {
+                cam = new Capture(VIDEODEVICE, VIDEOWIDTH, VIDEOHEIGHT, VIDEOBITSPERPIXEL, picMain);
+            }
+            catch
+            {
+                MessageBox.Show("摄像头打开错误，请首先确保摄像头连接并设置正确！");
+            }
         }
         /// <summary>
         /// Clean up any resources being used.
@@ -105,10 +114,6 @@ namespace GOGPY
             gocsharphelper.Clear();
         }
         
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-         
-        }
 
         //尝试使用timer，解决实时显示问题
         private void timer_Tick(object sender, EventArgs e)
@@ -136,10 +141,10 @@ namespace GOGPY
             picPreview.Image = image0;
 
         }
-
+        //打开设置界面
         private void btnConfig_Click(object sender, EventArgs e)
         {
-            camtimer.Enabled = true;
+            formconfig.ShowDialog();
         }
         #endregion
       
@@ -212,10 +217,5 @@ namespace GOGPY
         }
         #endregion
 
-     
-
-      
-
-       
     }
 }
