@@ -1,5 +1,5 @@
 // 这是主 DLL 文件。
-
+#using <system.drawing.dll>
 #include "stdafx.h"
 #include "GOClrDll.h"
 #include "opencv/cv.h"
@@ -7,9 +7,16 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 
+#include <opencv2/core/utility.hpp>
+#include "opencv2/imgproc.hpp"
+#include "opencv2/imgcodecs.hpp"
+
 using namespace std;
 using namespace System::Collections::Generic;
 using namespace System::Runtime::InteropServices;
+using namespace System::Drawing;
+using namespace System::Drawing::Imaging;
+
 using namespace GOClrDll;
 
 //! the color conversion code
@@ -276,77 +283,53 @@ enum
 	IMREAD_ANYDEPTH   =2,
 	IMREAD_ANYCOLOR   =4
 };
- 
-String^  GOClrClass::Method(cli::array<unsigned char>^ pCBuf1)
+
+System::Drawing::Bitmap^ MatToBitmap(const cv::Mat& img)
 {
-	 pin_ptr<System::Byte> p1 = &pCBuf1[0];
-	 unsigned char* pby1 = p1;
-	 cv::Mat img_data1(pCBuf1->Length,1,CV_8U,pby1);
-	 cv::Mat img_object = cv::imdecode(img_data1,IMREAD_UNCHANGED);
-	 //////////////////////////////////处理过程///////////////////////////////////////
-	 cvtColor(img_object,img_object,40);
-	 /////////////////////////////////////////////////////////////////////////////////
-	 if (!img_object.data)
-		return nullptr;
-	 //获得目录，保存文件
-	 cv::imwrite("c:/strDst.jpg",img_object);
-	 return "c:/strDst.jpg";
-}
- 
-//转换颜色的clr函数
-String^  GOClrClass::ConvetAndSplit0(cli::array<unsigned char>^ pCBuf1,int iparam)
-{
-	string strFilePath = "c:/ConvetAndSplit0.jpg";
-	pin_ptr<System::Byte> p1 = &pCBuf1[0];
-	unsigned char* pby1 = p1;
-	cv::Mat img_data1(pCBuf1->Length,1,CV_8U,pby1);
-	cv::Mat img_object = cv::imdecode(img_data1,IMREAD_UNCHANGED);
-	//////////////////////////////////处理过程///////////////////////////////////////
-	vector<cv::Mat> matSplit;
-	cvtColor(img_object,img_object,iparam);
-	split(img_object,matSplit);
-	///////////////////////////////////输出结果//////////////////////////////////////
-	if (!img_object.data)
-		return nullptr;
-	//获得目录，保存文件
-	cv::imwrite(strFilePath,matSplit[0]);
-	return "c:/ConvetAndSplit0.jpg";
+	if (img.type() != CV_8UC3)
+	{
+		throw gcnew NotSupportedException("Only images of type CV_8UC3 are supported for conversion to Bitmap");
+	}
+
+	//create the bitmap and get the pointer to the data
+	PixelFormat fmt(PixelFormat::Format24bppRgb);
+	Bitmap ^bmpimg = gcnew Bitmap(img.cols, img.rows, fmt);
+
+	BitmapData ^data = bmpimg->LockBits(System::Drawing::Rectangle(0, 0, img.cols, img.rows), ImageLockMode::WriteOnly, fmt);
+
+	Byte *dstData = reinterpret_cast<Byte*>(data->Scan0.ToPointer());
+
+	unsigned char *srcData = img.data;
+
+	for (int row = 0; row < data->Height; ++row)
+	{
+		memcpy(reinterpret_cast<void*>(&dstData[row*data->Stride]), reinterpret_cast<void*>(&srcData[row*img.step]), img.cols*img.channels());
+	}
+
+	bmpimg->UnlockBits(data);
+
+	return bmpimg;
 }
 
-String^  GOClrClass::ConvetAndSplit1(cli::array<unsigned char>^ pCBuf1,int iparam)
+Bitmap^  GOClrClass::testMethod(cli::array<unsigned char>^ pCBuf1)
 {
-	string strFilePath = "c:/ConvetAndSplit1.jpg";
+	//将输入cli::array<unsigned char>转换为cv::Mat
 	pin_ptr<System::Byte> p1 = &pCBuf1[0];
 	unsigned char* pby1 = p1;
 	cv::Mat img_data1(pCBuf1->Length,1,CV_8U,pby1);
 	cv::Mat img_object = cv::imdecode(img_data1,IMREAD_UNCHANGED);
-	//////////////////////////////////处理过程///////////////////////////////////////
-	vector<cv::Mat> matSplit;
-	cvtColor(img_object,img_object,iparam);
-	split(img_object,matSplit);
-	///////////////////////////////////输出结果//////////////////////////////////////
 	if (!img_object.data)
 		return nullptr;
-	//获得目录，保存文件
-	cv::imwrite(strFilePath,matSplit[1]);
-	return "c:/ConvetAndSplit1.jpg";
+
+	//OpenCV的算法处理过程
+	cvtColor(img_object,img_object,40);
+	
+	//将cv::Mat转换为Bitmap(只能传输cv_8u3格式数据）
+	if (!img_object.data)
+		return nullptr;
+	Bitmap^ bitmap = MatToBitmap(img_object);
+	return bitmap;
 }
 
-String^  GOClrClass::ConvetAndSplit2(cli::array<unsigned char>^ pCBuf1,int iparam)
-{
-	string strFilePath = "c:/ConvetAndSplit2.jpg";
-	pin_ptr<System::Byte> p1 = &pCBuf1[0];
-	unsigned char* pby1 = p1;
-	cv::Mat img_data1(pCBuf1->Length,1,CV_8U,pby1);
-	cv::Mat img_object = cv::imdecode(img_data1,IMREAD_UNCHANGED);
-	//////////////////////////////////处理过程///////////////////////////////////////
-	vector<cv::Mat> matSplit;
-	cvtColor(img_object,img_object,iparam);
-	split(img_object,matSplit);
-	///////////////////////////////////输出结果//////////////////////////////////////
-	if (!img_object.data)
-		return nullptr;
-	//获得目录，保存文件
-	cv::imwrite(strFilePath,matSplit[2]);
-	return "c:/ConvetAndSplit2.jpg";
-}
+
+

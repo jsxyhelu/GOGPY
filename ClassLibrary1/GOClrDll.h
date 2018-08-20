@@ -1,10 +1,26 @@
 // ClassLibrary1.h
 
 #pragma once
+#using <system.drawing.dll>
+
+#include "stdafx.h"
+#include "opencv/cv.h"
+#include "opencv2/core/core.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+
+#include <opencv2/core/utility.hpp>
+#include "opencv2/imgproc.hpp"
+#include "opencv2/imgcodecs.hpp"
+
 using namespace System;
 using namespace System::Data;
 using namespace System::IO;
+using namespace System::Drawing;
+using namespace System::Drawing::Imaging;
+
 using namespace std;
+
 
 namespace GOClrDll {
 
@@ -13,11 +29,7 @@ namespace GOClrDll {
 	public ref class GOClrClass
 	{
 		public :
-		String^ GOClrClass::Method(cli::array<unsigned char>^ pCBuf1);
-		//转换颜色的clr函数
-		String^  GOClrClass::ConvetAndSplit1(cli::array<unsigned char>^ pCBuf1,int iparam);
-		String^  GOClrClass::ConvetAndSplit2(cli::array<unsigned char>^ pCBuf1,int iparam);
-		String^  GOClrClass::ConvetAndSplit0(cli::array<unsigned char>^ pCBuf1,int iparam);
-
+		//常态化保存的testmethod
+		Bitmap^  GOClrClass::testMethod(cli::array<unsigned char>^ pCBuf1);
 	};
 }

@@ -36,6 +36,7 @@
             this.NoAdjust = new System.Windows.Forms.RadioButton();
             this.AutoAdjust = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.radioBin = new System.Windows.Forms.RadioButton();
             this.radioGray = new System.Windows.Forms.RadioButton();
             this.radioColor = new System.Windows.Forms.RadioButton();
@@ -195,6 +196,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.radioBin);
             this.groupBox3.Controls.Add(this.radioGray);
             this.groupBox3.Controls.Add(this.radioColor);
@@ -205,6 +207,16 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "拍摄类型";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 120);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 43);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // radioBin
             // 
@@ -359,6 +371,7 @@
             // 
             // camtimer
             // 
+            this.camtimer.Interval = 50;
             this.camtimer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // picMain
@@ -459,6 +472,7 @@
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.Timer camtimer;
         private System.Windows.Forms.PictureBox picMain;
+        private System.Windows.Forms.Button button1;
     }
 }
 
