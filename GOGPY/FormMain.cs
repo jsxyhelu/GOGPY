@@ -22,10 +22,10 @@ namespace GOGPY
         int iparam = 32;
         IntPtr m_ip = IntPtr.Zero;
         Image srcImage;
-    
         FormConfig formconfig = new FormConfig();
-       
         INIFileHelper inifilehelper = new INIFileHelper("./GOConfig");
+
+        GOClrClass client = new GOClrClass();
         #endregion
       
         #region 事件驱动
@@ -124,7 +124,15 @@ namespace GOGPY
             }
 
             // capture image
-            m_ip = cam.Click();//click就是采集吗？
+            try
+            {
+                m_ip = cam.Click();
+            }
+            catch
+            {
+                //do nothing,允许丢帧 TODO：是否改成继承上一帧更好
+            }
+            
             Bitmap b = new Bitmap(cam.Width, cam.Height, cam.Stride, PixelFormat.Format24bppRgb, m_ip);
 
             // If the image is upsidedown
@@ -133,20 +141,14 @@ namespace GOGPY
             if (picPreview.Image != null)
                 picPreview.Image.Dispose();
 
-
-            GOClrClass client = new GOClrClass();
-
-         
+            //调用clr+opencv图像处理模块
             MemoryStream ms = new MemoryStream();
             b.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
             byte[] bytes = ms.GetBuffer();
-            Bitmap bb = client.testMethod(bytes);
+            Bitmap bitmap = client.testMethod(bytes);
 
-            picPreview.Image = bb;
-
-
-           // picPreview.Image = image0;
-
+            //显示结果
+            picPreview.Image = bitmap;
         }
         //打开设置界面
         private void btnConfig_Click(object sender, EventArgs e)
@@ -159,6 +161,11 @@ namespace GOGPY
    
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            camtimer.Enabled = true;
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
         {
             camtimer.Enabled = true;
         }

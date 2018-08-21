@@ -79,6 +79,7 @@
             this.picPreview.Location = new System.Drawing.Point(12, 12);
             this.picPreview.Name = "picPreview";
             this.picPreview.Size = new System.Drawing.Size(1202, 802);
+            this.picPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picPreview.TabIndex = 0;
             this.picPreview.TabStop = false;
             // 
@@ -216,6 +217,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // radioBin
@@ -382,6 +384,7 @@
             this.picMain.Size = new System.Drawing.Size(414, 376);
             this.picMain.TabIndex = 5;
             this.picMain.TabStop = false;
+            this.picMain.Visible = false;
             // 
             // FormMain
             // 
@@ -416,6 +419,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GOGPY(2018年8月11日 jsxyhelu.cnblogs.com）";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbExposure)).EndInit();
             this.groupBox1.ResumeLayout(false);
