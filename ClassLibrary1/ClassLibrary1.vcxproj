@@ -40,7 +40,6 @@
     <Import Project="..\..\..\..\..\..\template\opencvNew86Debug.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="opencv248.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -52,8 +51,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>.\Release</OutDir>
-    <IncludePath>D:\Program Files\opencv248\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Program Files\opencv248\lib86;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Program Files\opencvNew\include;D:\Program Files\opencvNew\include\opencv;D:\Program Files\opencvNew\include\opencv2;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Program Files\opencvNew\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -75,7 +74,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world320.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

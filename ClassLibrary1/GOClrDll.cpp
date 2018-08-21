@@ -21,6 +21,7 @@ using namespace System::Drawing::Imaging;
 using namespace GOClrDll;
 
 
+
 System::Drawing::Bitmap^ MatToBitmap(const cv::Mat& img)
 {
 	if (img.type() != CV_8UC3)
@@ -79,11 +80,10 @@ Bitmap^  GOClrClass::testMethod(cli::array<unsigned char>^ pCBuf1)
 	////////////////////////////////////////////OpenCV的算法处理过程////////////////////////////////////
 	vector<vector<cv::Point> > contours;
 	vector<Vec4i> hierarchy;
-
 	Mat drawing = img_object.clone();
 	cvtColor(img_object,img_object,COLOR_BGR2GRAY);
 	cv::threshold(img_object,img_object,100,255,THRESH_OTSU);
-	bitwise_not(img_object,img_object);//反色
+	//bitwise_not(img_object,img_object);//反色
 	//Mat drawing = img_object.clone();
 	////寻找最大轮廓
 	vector<cv::Point> biggestContour = FindBiggestContour(img_object);
@@ -95,8 +95,8 @@ Bitmap^  GOClrClass::testMethod(cli::array<unsigned char>^ pCBuf1)
 	minRect.points( rect_points );
 	for( int j = 0; j < 4; j++ )
 		line( drawing, rect_points[j], rect_points[(j+1)%4], Scalar(0,255,0), 1, 8 );
+		//cvtColor(drawing,drawing,COLOR_GRAY2BGR);
 
-	//cvtColor(drawing,drawing,COLOR_GRAY2BGR);
 	/////////////////////////将cv::Mat转换为Bitmap(只能传输cv_8u3格式数据）///////////////////////////////
 	if (!drawing.data)
 		return nullptr;
