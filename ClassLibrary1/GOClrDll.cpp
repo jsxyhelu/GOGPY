@@ -83,20 +83,58 @@ Bitmap^  GOClrClass::testMethod(cli::array<unsigned char>^ pCBuf1)
 	Mat drawing = img_object.clone();
 	cvtColor(img_object,img_object,COLOR_BGR2GRAY);
 	cv::threshold(img_object,img_object,100,255,THRESH_OTSU);
-	//bitwise_not(img_object,img_object);//反色
-	//Mat drawing = img_object.clone();
 	////寻找最大轮廓
 	vector<cv::Point> biggestContour = FindBiggestContour(img_object);
+	vector<cv::Point> approxContour;
 	if (0==biggestContour.size())
 	    return nullptr;
-	////对最大轮廓创建可倾斜的边界框
+
+	//////对最大轮廓创建可倾斜的边界框(采用红色）
 	RotatedRect minRect = minAreaRect(biggestContour);
 	Point2f rect_points[4];
 	minRect.points( rect_points );
 	for( int j = 0; j < 4; j++ )
-		line( drawing, rect_points[j], rect_points[(j+1)%4], Scalar(0,255,0), 1, 8 );
-		//cvtColor(drawing,drawing,COLOR_GRAY2BGR);
+		line( drawing, rect_points[j], rect_points[(j+1)%4], Scalar(0,0,255), 1, 8 );
 
+	////分析最大轮廓，并绘制4个顶点的连线（采用绿色）
+    double peri  = arcLength(biggestContour,true);
+	approxPolyDP(biggestContour,approxContour,0.02*peri,true);
+	if (approxContour.size() == 4)//四个点
+	{
+		for( int j = 0; j < 4; j++ )
+			line( drawing, approxContour[j], approxContour[(j+1)%4], Scalar(0,255,0), 1, 8 );
+	}
+
+	////透视变化
+	
+	Point2f src_vertices[4];
+	Point2f dst_vertices[4];
+	if (approxContour.size() == 4)//四个点
+	{  
+		float radiusCircle;
+		Point2f centerCircle;
+		minEnclosingCircle(approxContour,centerCircle,radiusCircle);
+		for( int j = 0; j < 4; j++ )
+		{
+			if (approxContour[j].x < centerCircle.x && approxContour[j].y < centerCircle.y)
+				src_vertices[0] = approxContour[j];
+			if (approxContour[j].x > centerCircle.x && approxContour[j].y < centerCircle.y)
+				src_vertices[1] = approxContour[j];
+			if (approxContour[j].x < centerCircle.x && approxContour[j].y > centerCircle.y)
+				src_vertices[2] = approxContour[j];
+			if (approxContour[j].x > centerCircle.x && approxContour[j].y > centerCircle.y)
+				src_vertices[3] = approxContour[j];
+		}
+		float dstWidth = std::min((src_vertices[1].x - src_vertices[0].x),(src_vertices[3].x - src_vertices[2].x));
+		float dstHeight= std::min((src_vertices[3].y - src_vertices[1].y),(src_vertices[2].y - src_vertices[0].y));
+		dst_vertices[0] = Point2f(0, 0);
+		dst_vertices[1] = Point2f(dstWidth,0);
+		dst_vertices[2] = Point2f(0,dstHeight);
+		dst_vertices[3] = Point2f(dstWidth,dstHeight);
+		Mat warpMatrix = getPerspectiveTransform(src_vertices, dst_vertices);
+		warpPerspective(drawing, drawing, warpMatrix, drawing.size(), INTER_LINEAR, BORDER_CONSTANT);
+		drawing = drawing(Rect(0,0,dstWidth,dstHeight));
+	}
 	/////////////////////////将cv::Mat转换为Bitmap(只能传输cv_8u3格式数据）///////////////////////////////
 	if (!drawing.data)
 		return nullptr;
