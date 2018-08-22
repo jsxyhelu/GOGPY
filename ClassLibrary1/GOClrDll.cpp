@@ -105,8 +105,41 @@ Bitmap^  GOClrClass::testMethod(cli::array<unsigned char>^ pCBuf1)
 			line( drawing, approxContour[j], approxContour[(j+1)%4], Scalar(0,255,0), 1, 8 );
 	}
 
+	/////////////////////////将cv::Mat转换为Bitmap(只能传输cv_8u3格式数据）///////////////////////////////
+	if (!drawing.data)
+		return nullptr;
+	Bitmap^ bitmap = MatToBitmap(drawing);
+	return bitmap;
+}
+
+
+Bitmap^  GOClrClass::fetchresult(cli::array<unsigned char>^ pCBuf1)
+{
+	////////////////////////////////将输入cli::array<unsigned char>转换为cv::Mat/////////////////////////
+	pin_ptr<System::Byte> p1 = &pCBuf1[0];
+	unsigned char* pby1 = p1;
+	cv::Mat img_data1(pCBuf1->Length,1,CV_8U,pby1);
+	cv::Mat img_object = cv::imdecode(img_data1,IMREAD_UNCHANGED);
+	if (!img_object.data)
+		return nullptr;
+
+	////////////////////////////////////////////OpenCV的算法处理过程////////////////////////////////////
+	vector<vector<cv::Point> > contours;
+	vector<Vec4i> hierarchy;
+	Mat drawing = img_object.clone();
+	cvtColor(img_object,img_object,COLOR_BGR2GRAY);
+	cv::threshold(img_object,img_object,100,255,THRESH_OTSU);
+	////寻找最大轮廓
+	vector<cv::Point> biggestContour = FindBiggestContour(img_object);
+	vector<cv::Point> approxContour;
+	if (0==biggestContour.size())
+		return nullptr;
+
+	////分析最大轮廓，并绘制4个顶点的连线（采用绿色）
+	double peri  = arcLength(biggestContour,true);
+	approxPolyDP(biggestContour,approxContour,0.02*peri,true);
+
 	////透视变化
-	
 	Point2f src_vertices[4];
 	Point2f dst_vertices[4];
 	if (approxContour.size() == 4)//四个点
@@ -135,12 +168,15 @@ Bitmap^  GOClrClass::testMethod(cli::array<unsigned char>^ pCBuf1)
 		warpPerspective(drawing, drawing, warpMatrix, drawing.size(), INTER_LINEAR, BORDER_CONSTANT);
 		drawing = drawing(Rect(0,0,dstWidth,dstHeight));
 	}
+	else
+	{
+		return nullptr;
+	}
 	/////////////////////////将cv::Mat转换为Bitmap(只能传输cv_8u3格式数据）///////////////////////////////
 	if (!drawing.data)
 		return nullptr;
 	Bitmap^ bitmap = MatToBitmap(drawing);
 	return bitmap;
 }
-
 
 

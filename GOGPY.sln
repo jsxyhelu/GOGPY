@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GOGPY", "GOGPY\GOGPY.csproj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GOClrClasslibrary", "ClassLibrary1\ClassLibrary1.vcxproj", "{871C58B3-1FF5-4DFC-BB45-CF940446F1D8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GOCVHelper", "GOCVHelper\GOCVHelper.vcxproj", "{48632894-165B-4935-8269-0D9124D42A75}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,20 +41,6 @@ Global
 		{871C58B3-1FF5-4DFC-BB45-CF940446F1D8}.Release|Win32.ActiveCfg = Release|Win32
 		{871C58B3-1FF5-4DFC-BB45-CF940446F1D8}.Release|Win32.Build.0 = Release|Win32
 		{871C58B3-1FF5-4DFC-BB45-CF940446F1D8}.Release|x64.ActiveCfg = Release|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Debug|Win32.ActiveCfg = Debug|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Debug|Win32.Build.0 = Debug|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Debug|x64.ActiveCfg = Debug|x64
-		{48632894-165B-4935-8269-0D9124D42A75}.Debug|x64.Build.0 = Debug|x64
-		{48632894-165B-4935-8269-0D9124D42A75}.Release|Any CPU.ActiveCfg = Release|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Release|Win32.ActiveCfg = Release|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Release|Win32.Build.0 = Release|Win32
-		{48632894-165B-4935-8269-0D9124D42A75}.Release|x64.ActiveCfg = Release|x64
-		{48632894-165B-4935-8269-0D9124D42A75}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

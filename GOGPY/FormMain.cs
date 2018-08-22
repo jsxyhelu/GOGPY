@@ -24,6 +24,7 @@ namespace GOGPY
         Image srcImage;
         FormConfig formconfig = new FormConfig();
         INIFileHelper inifilehelper = new INIFileHelper("./GOConfig");
+        bool b_take_picture;
 
         GOClrClass client = new GOClrClass();
         #endregion
@@ -36,6 +37,7 @@ namespace GOGPY
             InitVideoDevice();
             //传值
             formconfig.fatherForm = this;
+            b_take_picture = false;
         }
 
         //选择视频设备
@@ -79,23 +81,8 @@ namespace GOGPY
         }
         private void btnCapture_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-
-            // Release any previous buffer
-            if (m_ip != IntPtr.Zero)
-            {
-                Marshal.FreeCoTaskMem(m_ip);
-                m_ip = IntPtr.Zero;
-            }
-
-            // capture image
-            m_ip = cam.Click();//click就是采集吗？
-            Bitmap b = new Bitmap(cam.Width, cam.Height, cam.Stride, PixelFormat.Format24bppRgb, m_ip);
-
-            // If the image is upsidedown
-            b.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            pictureBox1.Image = b;
-
+            if (b_take_picture == false)
+                b_take_picture = true;
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -147,6 +134,20 @@ namespace GOGPY
             byte[] bytes = ms.GetBuffer();
             Bitmap bitmap = client.testMethod(bytes);
 
+            Bitmap bitmap2;
+            if (b_take_picture == true)
+            {
+                bitmap2 = client.fetchresult(bytes);
+                if (bitmap2 == null)
+                {
+                    MessageBox.Show("图像获取错误!请重新获取");
+                }
+                else
+                {
+                    pictureBox1.Image = bitmap2;
+                    b_take_picture = false;
+                }
+            }
             //显示结果
             picPreview.Image = bitmap;
         }

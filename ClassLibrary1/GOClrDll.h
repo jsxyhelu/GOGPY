@@ -31,5 +31,6 @@ namespace GOClrDll {
 		public :
 		//常态化保存的testmethod
 		Bitmap^  GOClrClass::testMethod(cli::array<unsigned char>^ pCBuf1);
+		Bitmap^  GOClrClass::fetchresult(cli::array<unsigned char>^ pCBuf1);
 	};
 }

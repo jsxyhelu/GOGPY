@@ -1,4 +1,4 @@
-﻿生成启动时间为 2018-08-22 14:32:57。
+﻿生成启动时间为 2018-08-22 14:44:02。
      1>项目“E:\未来项目\GOGPY\主要程序\GOGPY\ClassLibrary1\ClassLibrary1.vcxproj”在节点 2 上(Build 个目标)。
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppBuild.targets(346,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
      1>ClCompile:
@@ -10,7 +10,7 @@
      1>D:\Program Files\opencvNew\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
      1>D:\Program Files\opencvNew\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
      1>D:\Program Files\opencvNew\include\opencv2/imgproc.hpp(606): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-     1>GOClrDll.cpp(136): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>GOClrDll.cpp(169): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
      1>d:\program files\opencvnew\include\opencv2\core\cvstd.hpp(596): warning C4793: “cv::String::String”: 编译为本机的函数:
          	托管代码中发现一个不受支持的内部函数
      1>d:\program files\opencvnew\include\opencv2\core\mat.inl.hpp(413): warning C4793: “cv::Mat::Mat”: 编译为本机的函数:
@@ -46,4 +46,4 @@
 
 生成成功。
 
-已用时间 00:00:01.53
+已用时间 00:00:01.90
