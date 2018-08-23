@@ -9,6 +9,8 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
+using System.Collections.Generic;
+
 using GOClrDll;
 using DirectShowLib;
 
@@ -23,6 +25,8 @@ namespace GOGPY
         IntPtr m_ip = IntPtr.Zero;
         Image srcImage;
         FormConfig formconfig = new FormConfig();
+        FormShow formshow = new FormShow();
+
         INIFileHelper inifilehelper = new INIFileHelper("./GOConfig");
         bool b_take_picture;
 
@@ -48,8 +52,8 @@ namespace GOGPY
                 //读取参数
                 string strTmp = inifilehelper.IniReadValue("视频采集", "摄像头序号");
                 int VIDEODEVICE = Convert.ToInt32(strTmp); // zero based index of video capture device to use
-                const int VIDEOWIDTH = 640; // Depends on video device caps
-                const int VIDEOHEIGHT = 480; // Depends on video device caps
+                const int VIDEOWIDTH = 1024; // 是用默认（最大）分辨率
+                const int VIDEOHEIGHT = 768; // Depends on video device caps
                 const int VIDEOBITSPERPIXEL = 24; // BitsPerPixel values determined by device
                 cam = new Capture(VIDEODEVICE, VIDEOWIDTH, VIDEOHEIGHT, VIDEOBITSPERPIXEL, picMain);
             }
@@ -144,8 +148,13 @@ namespace GOGPY
                 }
                 else
                 {
-                    pictureBox1.Image = bitmap2;
+                    //pictureBox1.Image = bitmap2;
+                    //保存这个图像
+                    bitmap2.Save(Application.StartupPath + "/" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                     b_take_picture = false;
+                    MessageBox.Show("图像采集成功！");
+
+                    UpdateFileList();
                 }
             }
             //显示结果
@@ -158,18 +167,55 @@ namespace GOGPY
         }
         #endregion
       
-
-   
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            camtimer.Enabled = true;
-        }
-
         private void FormMain_Load(object sender, EventArgs e)
         {
             camtimer.Enabled = true;
         }
 
+        //综合测试按钮
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            
+
+     
+        }
+
+        //更新filelist
+        private void UpdateFileList()
+        {
+            System.IO.DirectoryInfo dir = new DirectoryInfo(Application.StartupPath);
+            if (dir.Exists)
+            {
+                FileInfo[] fiList = dir.GetFiles();
+                List<string> mList = new List<string>();
+                foreach (var item in fiList)
+                {
+                    var FilePath = item.FullName; //路径
+                    var FileName = Path.GetFileNameWithoutExtension(FilePath);
+                    var ExtName = Path.GetExtension(FilePath);
+                    if (ExtName.ToString() == ".jpg")
+                    {
+                        mList.Add(FileName.ToString());
+                    }
+                }
+                mList.Sort();   //按时间降序排列
+                mList.Reverse();
+                //读取最多4个图片
+                if (mList.Count > 1)
+                {
+                    //测试
+                    pictureBox1.Image = Image.FromFile(Application.StartupPath + "/" + mList[0] + ".jpg");
+                }
+
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            formshow.showImage(pb.Image);
+            formshow.Visible = true;
+        }
     }
 }
