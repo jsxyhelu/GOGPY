@@ -38,7 +38,7 @@ namespace GOGPY
         IBaseFilter theDevice = null;
 
         private Capture cam;
-        int iparam = 32;
+        List<PictureBox> listPictureBox; //控件集合
         IntPtr m_ip = IntPtr.Zero;
         Image srcImage;
         FormConfig formconfig = new FormConfig();
@@ -120,6 +120,10 @@ namespace GOGPY
         {
             camtimer.Enabled = true;
             string strSavePath = null;
+          
+            //读取现有图片
+            UpdateFileList();
+
             //设置图片保存位置
             try
             {
@@ -170,7 +174,13 @@ namespace GOGPY
                 radioGray.Checked = false;
                 radioBin.Checked = true;
             }
-           
+            //设定控件组，这个操作在所有控件读取后进行
+            listPictureBox = new List<PictureBox>();
+            listPictureBox.Add(pictureBox1);
+            listPictureBox.Add(pictureBox2);
+            listPictureBox.Add(pictureBox3);
+            listPictureBox.Add(pictureBox4);
+            listPictureBox.Add(pictureBox5);
         }
 
         //综合测试按钮
@@ -257,12 +267,12 @@ namespace GOGPY
                 }
                 else
                 {
-                    //pictureBox1.Image = bitmap2;
+                   
                     //保存这个图像
                     bitmap2.Save(Application.StartupPath + "/" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                     b_take_picture = false;
                     MessageBox.Show("图像采集成功！");
-
+                    //更新左下方文件目录
                     UpdateFileList();
                 }
             }
@@ -279,10 +289,19 @@ namespace GOGPY
       
         #region helper函数
 
-        //更新filelist
+        //更新左下方文件目录
         private void UpdateFileList()
         {
-            System.IO.DirectoryInfo dir = new DirectoryInfo(Application.StartupPath);
+            string strPath;
+            if (Directory.Exists(tbResultPath.Text)) 
+            {
+                strPath = tbResultPath.Text;
+            }
+            else 
+            {
+                strPath = Application.StartupPath;
+            }
+            System.IO.DirectoryInfo dir = new DirectoryInfo(strPath);
             if (dir.Exists)
             {
                 FileInfo[] fiList = dir.GetFiles();
@@ -299,11 +318,21 @@ namespace GOGPY
                 }
                 mList.Sort();   //按时间降序排列
                 mList.Reverse();
-                //读取最多4个图片
-                if (mList.Count > 1)
+                //读取最多5个图片
+                if (mList.Count > 5)
                 {
-                    //测试
-                    pictureBox1.Image = Image.FromFile(Application.StartupPath + "/" + mList[0] + ".jpg");
+                    for(int i = 0;i<5;i++)
+                    {
+                       listPictureBox[i].Image = Image.FromFile(strPath+"/"+mList[i]+".jpg");
+                    }
+                  
+                }
+                else 
+                {
+                    for (int i = 0; i < mList.Count; i++)
+                    {
+                       listPictureBox[i].Image = Image.FromFile(strPath + "/" + mList[i] + ".jpg");
+                    }
                 }
 
             }
@@ -476,5 +505,7 @@ namespace GOGPY
                 inifilehelper.IniWriteValue("拍摄类型", "拍摄类型", "二值");
             }
         }
+
+       
     }
 }
