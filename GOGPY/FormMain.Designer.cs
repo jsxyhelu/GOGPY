@@ -45,9 +45,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.camtimer = new System.Windows.Forms.Timer(this.components);
             this.picMain = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.btnVideoConfig = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbExposure)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -55,9 +54,6 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // picPreview
@@ -76,41 +72,46 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(1233, 15);
+            this.label1.Location = new System.Drawing.Point(1233, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 27);
+            this.label1.Size = new System.Drawing.Size(132, 27);
             this.label1.TabIndex = 1;
-            this.label1.Text = "视频旋转：";
+            this.label1.Text = "摄像头选择：";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(1233, 52);
+            this.label2.Location = new System.Drawing.Point(1154, 887);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 27);
             this.label2.TabIndex = 1;
             this.label2.Text = "曝光度：";
+            this.label2.Visible = false;
             // 
             // tbExposure
             // 
-            this.tbExposure.Location = new System.Drawing.Point(1317, 56);
+            this.tbExposure.Enabled = false;
+            this.tbExposure.Location = new System.Drawing.Point(1238, 891);
             this.tbExposure.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbExposure.Name = "tbExposure";
             this.tbExposure.Size = new System.Drawing.Size(192, 56);
             this.tbExposure.TabIndex = 2;
+            this.tbExposure.Visible = false;
             // 
             // cbExposure
             // 
             this.cbExposure.AutoSize = true;
+            this.cbExposure.Enabled = false;
             this.cbExposure.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbExposure.Location = new System.Drawing.Point(1515, 55);
+            this.cbExposure.Location = new System.Drawing.Point(1436, 890);
             this.cbExposure.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbExposure.Name = "cbExposure";
             this.cbExposure.Size = new System.Drawing.Size(74, 31);
             this.cbExposure.TabIndex = 3;
             this.cbExposure.Text = "自动";
             this.cbExposure.UseVisualStyleBackColor = true;
+            this.cbExposure.Visible = false;
             // 
             // groupBox1
             // 
@@ -174,7 +175,7 @@
             // NoAdjust
             // 
             this.NoAdjust.AutoSize = true;
-            this.NoAdjust.Location = new System.Drawing.Point(180, 52);
+            this.NoAdjust.Location = new System.Drawing.Point(204, 74);
             this.NoAdjust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NoAdjust.Name = "NoAdjust";
             this.NoAdjust.Size = new System.Drawing.Size(93, 31);
@@ -186,7 +187,7 @@
             // AutoAdjust
             // 
             this.AutoAdjust.AutoSize = true;
-            this.AutoAdjust.Location = new System.Drawing.Point(31, 52);
+            this.AutoAdjust.Location = new System.Drawing.Point(55, 74);
             this.AutoAdjust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AutoAdjust.Name = "AutoAdjust";
             this.AutoAdjust.Size = new System.Drawing.Size(113, 31);
@@ -317,38 +318,25 @@
             this.picMain.TabStop = false;
             this.picMain.Visible = false;
             // 
-            // pictureBox2
+            // btnVideoConfig
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(172, 820);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(139, 159);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
+            this.btnVideoConfig.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnVideoConfig.Location = new System.Drawing.Point(1451, 45);
+            this.btnVideoConfig.Name = "btnVideoConfig";
+            this.btnVideoConfig.Size = new System.Drawing.Size(134, 33);
+            this.btnVideoConfig.TabIndex = 11;
+            this.btnVideoConfig.Text = "视频设置";
+            this.btnVideoConfig.UseVisualStyleBackColor = true;
+            this.btnVideoConfig.Click += new System.EventHandler(this.btnVideoConfig_Click);
             // 
-            // pictureBox3
+            // comboBox1
             // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(330, 820);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(139, 159);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 7;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(490, 819);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(139, 159);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 8;
-            this.pictureBox4.TabStop = false;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(1246, 52);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(180, 23);
+            this.comboBox1.TabIndex = 12;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // FormMain
             // 
@@ -356,9 +344,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1607, 990);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.btnVideoConfig);
             this.Controls.Add(this.picMain);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox3);
@@ -389,9 +376,6 @@
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -421,9 +405,8 @@
         private System.Windows.Forms.Timer camtimer;
         private System.Windows.Forms.PictureBox picMain;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Button btnVideoConfig;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

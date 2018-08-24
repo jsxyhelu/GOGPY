@@ -276,7 +276,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(428, 574);
+            this.btnSave.Location = new System.Drawing.Point(434, 585);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(134, 33);
             this.btnSave.TabIndex = 2;
@@ -330,7 +330,6 @@
             this.Name = "FormConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "系统设置";
-         
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbCompress)).EndInit();
