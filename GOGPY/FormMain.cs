@@ -121,8 +121,6 @@ namespace GOGPY
             camtimer.Enabled = true;
             string strSavePath = null;
           
-            //读取现有图片
-            UpdateFileList();
 
             //设置图片保存位置
             try
@@ -181,6 +179,9 @@ namespace GOGPY
             listPictureBox.Add(pictureBox3);
             listPictureBox.Add(pictureBox4);
             listPictureBox.Add(pictureBox5);
+
+            //读取现有图片
+            UpdateFileList();
         }
 
         //综合测试按钮
@@ -267,11 +268,19 @@ namespace GOGPY
                 }
                 else
                 {
-                   
+                    string strPath;
+                    if (Directory.Exists(tbResultPath.Text))
+                    {
+                        strPath = tbResultPath.Text;
+                    }
+                    else
+                    {
+                        strPath = Application.StartupPath;
+                    }
                     //保存这个图像
-                    bitmap2.Save(Application.StartupPath + "/" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                    bitmap2.Save(strPath + "/" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                     b_take_picture = false;
-                    MessageBox.Show("图像采集成功！");
+                   // MessageBox.Show("图像采集成功！");
                     //更新左下方文件目录
                     UpdateFileList();
                 }
@@ -325,7 +334,6 @@ namespace GOGPY
                     {
                        listPictureBox[i].Image = Image.FromFile(strPath+"/"+mList[i]+".jpg");
                     }
-                  
                 }
                 else 
                 {
@@ -445,6 +453,8 @@ namespace GOGPY
             {
                 inifilehelper.IniWriteValue("保存配置", "图片存放目录", tbResultPath.Text);
                 MessageBox.Show("图片存放目录保存成功！");
+                //读取现有图片
+                UpdateFileList();
             }
             catch 
             {
