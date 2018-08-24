@@ -113,7 +113,9 @@ Bitmap^  GOClrClass::testMethod(cli::array<unsigned char>^ pCBuf1)
 }
 
 
-Bitmap^  GOClrClass::fetchresult(cli::array<unsigned char>^ pCBuf1)
+//参数 ifAdjust 是否切割边缘
+//参数 method方法 0 彩色 1 灰度 2 bin值
+Bitmap^  GOClrClass::fetchresult(cli::array<unsigned char>^ pCBuf1,bool ifAdjust,int method)
 {
 	////////////////////////////////将输入cli::array<unsigned char>转换为cv::Mat/////////////////////////
 	pin_ptr<System::Byte> p1 = &pCBuf1[0];
@@ -127,50 +129,69 @@ Bitmap^  GOClrClass::fetchresult(cli::array<unsigned char>^ pCBuf1)
 	vector<vector<cv::Point> > contours;
 	vector<Vec4i> hierarchy;
 	Mat drawing = img_object.clone();
-	cvtColor(img_object,img_object,COLOR_BGR2GRAY);
-	cv::threshold(img_object,img_object,100,255,THRESH_OTSU);
-	////寻找最大轮廓
-	vector<cv::Point> biggestContour = FindBiggestContour(img_object);
-	vector<cv::Point> approxContour;
-	if (0==biggestContour.size())
-		return nullptr;
 
-	////分析最大轮廓，并绘制4个顶点的连线（采用绿色）
-	double peri  = arcLength(biggestContour,true);
-	approxPolyDP(biggestContour,approxContour,0.02*peri,true);
-
-	////透视变化
-	Point2f src_vertices[4];
-	Point2f dst_vertices[4];
-	if (approxContour.size() == 4)//四个点
-	{  
-		float radiusCircle;
-		Point2f centerCircle;
-		minEnclosingCircle(approxContour,centerCircle,radiusCircle);
-		for( int j = 0; j < 4; j++ )
-		{
-			if (approxContour[j].x < centerCircle.x && approxContour[j].y < centerCircle.y)
-				src_vertices[0] = approxContour[j];
-			if (approxContour[j].x > centerCircle.x && approxContour[j].y < centerCircle.y)
-				src_vertices[1] = approxContour[j];
-			if (approxContour[j].x < centerCircle.x && approxContour[j].y > centerCircle.y)
-				src_vertices[2] = approxContour[j];
-			if (approxContour[j].x > centerCircle.x && approxContour[j].y > centerCircle.y)
-				src_vertices[3] = approxContour[j];
-		}
-		float dstWidth = std::min((src_vertices[1].x - src_vertices[0].x),(src_vertices[3].x - src_vertices[2].x));
-		float dstHeight= std::min((src_vertices[3].y - src_vertices[1].y),(src_vertices[2].y - src_vertices[0].y));
-		dst_vertices[0] = Point2f(0, 0);
-		dst_vertices[1] = Point2f(dstWidth,0);
-		dst_vertices[2] = Point2f(0,dstHeight);
-		dst_vertices[3] = Point2f(dstWidth,dstHeight);
-		Mat warpMatrix = getPerspectiveTransform(src_vertices, dst_vertices);
-		warpPerspective(drawing, drawing, warpMatrix, drawing.size(), INTER_LINEAR, BORDER_CONSTANT);
-		drawing = drawing(Rect(0,0,dstWidth,dstHeight));
-	}
-	else
+	if (ifAdjust)
 	{
-		return nullptr;
+		cvtColor(img_object,img_object,COLOR_BGR2GRAY);
+		cv::threshold(img_object,img_object,100,255,THRESH_OTSU);
+		////寻找最大轮廓
+		vector<cv::Point> biggestContour = FindBiggestContour(img_object);
+		vector<cv::Point> approxContour;
+		if (0==biggestContour.size())
+			return nullptr;
+
+		////分析最大轮廓，并绘制4个顶点的连线（采用绿色）
+		double peri  = arcLength(biggestContour,true);
+		approxPolyDP(biggestContour,approxContour,0.02*peri,true);
+
+		////透视变化
+		Point2f src_vertices[4];
+		Point2f dst_vertices[4];
+		if (approxContour.size() == 4)//四个点
+		{  
+			float radiusCircle;
+			Point2f centerCircle;
+			minEnclosingCircle(approxContour,centerCircle,radiusCircle);
+			for( int j = 0; j < 4; j++ )
+			{
+				if (approxContour[j].x < centerCircle.x && approxContour[j].y < centerCircle.y)
+					src_vertices[0] = approxContour[j];
+				if (approxContour[j].x > centerCircle.x && approxContour[j].y < centerCircle.y)
+					src_vertices[1] = approxContour[j];
+				if (approxContour[j].x < centerCircle.x && approxContour[j].y > centerCircle.y)
+					src_vertices[2] = approxContour[j];
+				if (approxContour[j].x > centerCircle.x && approxContour[j].y > centerCircle.y)
+					src_vertices[3] = approxContour[j];
+			}
+			float dstWidth = std::min((src_vertices[1].x - src_vertices[0].x),(src_vertices[3].x - src_vertices[2].x));
+			float dstHeight= std::min((src_vertices[3].y - src_vertices[1].y),(src_vertices[2].y - src_vertices[0].y));
+			dst_vertices[0] = Point2f(0, 0);
+			dst_vertices[1] = Point2f(dstWidth,0);
+			dst_vertices[2] = Point2f(0,dstHeight);
+			dst_vertices[3] = Point2f(dstWidth,dstHeight);
+			Mat warpMatrix = getPerspectiveTransform(src_vertices, dst_vertices);
+			warpPerspective(drawing, drawing, warpMatrix, drawing.size(), INTER_LINEAR, BORDER_CONSTANT);
+			drawing = drawing(Rect(0,0,dstWidth,dstHeight));
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
+	//0 彩色 1 灰度 2 bin
+	switch (method)
+	{
+	case 1:
+		cvtColor(drawing,drawing,COLOR_BGR2GRAY);
+		cvtColor(drawing,drawing,COLOR_GRAY2BGR);
+		break;
+	case 2:
+		cvtColor(drawing,drawing,COLOR_BGR2GRAY);
+		threshold(drawing,drawing,100,255,THRESH_BINARY);
+		cvtColor(drawing,drawing,COLOR_GRAY2BGR);
+		break;
+	default:
+		break;
 	}
 	/////////////////////////将cv::Mat转换为Bitmap(只能传输cv_8u3格式数据）///////////////////////////////
 	if (!drawing.data)

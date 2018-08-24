@@ -190,6 +190,7 @@ namespace GOGPY
 
         }
 
+        //点击显示图片按牛牛
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
@@ -261,7 +262,15 @@ namespace GOGPY
             Bitmap bitmap2;
             if (b_take_picture == true)
             {
-                bitmap2 = client.fetchresult(bytes);
+                bool bifAjust = true;
+                int imethod = 0;
+                if (NoAdjust.Checked)
+                    bifAjust = false;
+                if (radioGray.Checked)
+                    imethod = 1;
+                if (radioBin.Checked)
+                    imethod = 2;
+                bitmap2 = client.fetchresult(bytes, bifAjust, imethod);
                 if (bitmap2 == null)
                 {
                     MessageBox.Show("图像获取错误!请重新获取");
@@ -327,6 +336,11 @@ namespace GOGPY
                 }
                 mList.Sort();   //按时间降序排列
                 mList.Reverse();
+                //clear现有图片
+                for (int i = 0; i < 5; i++)
+                {
+                    listPictureBox[i].Image = null;
+                }
                 //读取最多5个图片
                 if (mList.Count > 5)
                 {
