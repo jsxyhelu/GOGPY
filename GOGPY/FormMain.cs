@@ -38,7 +38,6 @@ namespace GOGPY
         IBaseFilter theDevice = null;
 
         private Capture cam;
-        string strPath = "";
         int iparam = 32;
         IntPtr m_ip = IntPtr.Zero;
         Image srcImage;
@@ -120,6 +119,58 @@ namespace GOGPY
         private void FormMain_Load(object sender, EventArgs e)
         {
             camtimer.Enabled = true;
+            string strSavePath = null;
+            //设置图片保存位置
+            try
+            {
+                strSavePath = inifilehelper.IniReadValue("保存配置", "图片存放目录");
+                if (Directory.Exists(strSavePath))
+                {
+                    tbResultPath.Text = strSavePath;
+                }
+                else
+                {
+                    MessageBox.Show("配置目录错误，采用当前程序目录");
+                    tbResultPath.Text = Application.StartupPath;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("配置程序错误，请联系操作人员！");
+            }
+            //设置矫正不矫正
+            string  strAdjust = inifilehelper.IniReadValue("矫正方式", "矫正");
+            if (strAdjust == "true")
+            {
+                AutoAdjust.Checked = true;
+                NoAdjust.Checked = false;
+            }
+            else
+            {
+                AutoAdjust.Checked = false;
+                NoAdjust.Checked = true;
+            }
+            //设定采集模式
+            string strColor = inifilehelper.IniReadValue("拍摄类型", "拍摄类型");
+            if (strColor == "彩色")
+            {
+                radioColor.Checked = true;
+                radioGray.Checked = false;
+                radioBin.Checked = false;
+            }
+            else if (strColor == "灰度")
+            {
+                radioColor.Checked = false;
+                radioGray.Checked = true;
+                radioBin.Checked = false;
+            }
+            else
+            {
+                radioColor.Checked = false;
+                radioGray.Checked = false;
+                radioBin.Checked = true;
+            }
+           
         }
 
         //综合测试按钮
@@ -143,6 +194,15 @@ namespace GOGPY
             camtimer.Enabled = false;
             //选择视频设备
             InitVideoDevice();
+            //生成配套的视频控制界面
+            if (theDevice != null)
+            {
+                Marshal.ReleaseComObject(theDevice);
+                theDevice = null;
+            }
+            //Create the filter for the selected video input device
+            string devicepath = comboBox1.SelectedItem.ToString();
+            theDevice = CreateFilter(FilterCategory.VideoInputDevice, devicepath);
             camtimer.Enabled = true;
         }
 
@@ -250,6 +310,29 @@ namespace GOGPY
         }
 
         /// <summary>
+        /// Enumerates all filters of the selected category and returns the IBaseFilter for the 
+        /// filter described in friendlyname
+        /// </summary>
+        /// <param name="category">Category of the filter</param>
+        /// <param name="friendlyname">Friendly name of the filter</param>
+        /// <returns>IBaseFilter for the device</returns>
+        private IBaseFilter CreateFilter(Guid category, string friendlyname)
+        {
+            object source = null;
+            Guid iid = typeof(IBaseFilter).GUID;
+            foreach (DsDevice device in DsDevice.GetDevicesOfCat(category))
+            {
+                if (device.Name.CompareTo(friendlyname) == 0)
+                {
+                    device.Mon.BindToObject(null, null, ref iid, out source);
+                    break;
+                }
+            }
+
+            return (IBaseFilter)source;
+        }
+
+        /// <summary>
         /// Displays a property page for a filter
         /// </summary>
         /// <param name="dev">The filter for which to display a property page</param>
@@ -302,6 +385,7 @@ namespace GOGPY
             Marshal.FreeCoTaskMem(caGUID.pElems);
         }
 
+
         //选择视频设备
         public void InitVideoDevice()
         {
@@ -323,5 +407,74 @@ namespace GOGPY
             }
         }
         #endregion
+
+        //打开并设置目录
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                inifilehelper.IniWriteValue("保存配置", "图片存放目录", tbResultPath.Text);
+                MessageBox.Show("图片存放目录保存成功！");
+            }
+            catch 
+            {
+                MessageBox.Show("图片存放目录保存失败！");
+            }
+           
+
+
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.ShowDialog();
+            string strPath = folderBrowserDialog1.SelectedPath;
+            tbResultPath.Text = strPath;
+        }
+
+        //打开图像
+        private void btnWatch_Click(object sender, EventArgs e)
+        {
+            //打开目录
+            if (Directory.Exists(tbResultPath.Text))
+            {
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                proc.StartInfo.FileName = tbResultPath.Text;
+                proc.StartInfo.UseShellExecute = true;
+                proc.Start();  
+            }
+        }
+
+        //设定矫正
+        private void AutoAdjust_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AutoAdjust.Checked == true)
+            {
+                inifilehelper.IniWriteValue("矫正方式", "矫正","true");
+
+            }
+            else 
+            {
+                inifilehelper.IniWriteValue("矫正方式", "矫正", "false");
+            }
+        }
+
+        //设定颜色
+        private void radioColor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioColor.Checked == true)
+            {
+                inifilehelper.IniWriteValue("拍摄类型", "拍摄类型", "彩色");
+            }
+            else if (radioGray.Checked == true)
+            {
+                inifilehelper.IniWriteValue("拍摄类型", "拍摄类型", "灰度");
+            }
+            else 
+            {
+                inifilehelper.IniWriteValue("拍摄类型", "拍摄类型", "二值");
+            }
+        }
     }
 }

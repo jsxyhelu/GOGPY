@@ -29,7 +29,7 @@
             this.tbExposure = new System.Windows.Forms.TrackBar();
             this.cbExposure = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnWatch = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
             this.tbResultPath = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -47,6 +47,8 @@
             this.picMain = new System.Windows.Forms.PictureBox();
             this.btnVideoConfig = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbExposure)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -115,6 +117,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnWatch);
             this.groupBox1.Controls.Add(this.btnBrowse);
             this.groupBox1.Controls.Add(this.btnSetting);
             this.groupBox1.Controls.Add(this.tbResultPath);
@@ -128,34 +131,36 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "图像存放位置";
             // 
-            // btnBrowse
+            // btnWatch
             // 
-            this.btnBrowse.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnBrowse.Location = new System.Drawing.Point(63, 101);
-            this.btnBrowse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(99, 32);
-            this.btnBrowse.TabIndex = 1;
-            this.btnBrowse.Text = "浏览图像";
-            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnWatch.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWatch.Location = new System.Drawing.Point(55, 101);
+            this.btnWatch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnWatch.Name = "btnWatch";
+            this.btnWatch.Size = new System.Drawing.Size(123, 32);
+            this.btnWatch.TabIndex = 1;
+            this.btnWatch.Text = "浏览图像";
+            this.btnWatch.UseVisualStyleBackColor = true;
+            this.btnWatch.Click += new System.EventHandler(this.btnWatch_Click);
             // 
             // btnSetting
             // 
             this.btnSetting.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSetting.Location = new System.Drawing.Point(187, 101);
+            this.btnSetting.Location = new System.Drawing.Point(224, 101);
             this.btnSetting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSetting.Name = "btnSetting";
-            this.btnSetting.Size = new System.Drawing.Size(99, 32);
+            this.btnSetting.Size = new System.Drawing.Size(123, 32);
             this.btnSetting.TabIndex = 1;
             this.btnSetting.Text = "存储设置";
             this.btnSetting.UseVisualStyleBackColor = true;
+            this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
             // tbResultPath
             // 
             this.tbResultPath.Location = new System.Drawing.Point(19, 41);
             this.tbResultPath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbResultPath.Name = "tbResultPath";
-            this.tbResultPath.Size = new System.Drawing.Size(327, 34);
+            this.tbResultPath.Size = new System.Drawing.Size(278, 34);
             this.tbResultPath.TabIndex = 0;
             // 
             // groupBox2
@@ -183,6 +188,7 @@
             this.NoAdjust.TabStop = true;
             this.NoAdjust.Text = "不矫正";
             this.NoAdjust.UseVisualStyleBackColor = true;
+            this.NoAdjust.CheckedChanged += new System.EventHandler(this.AutoAdjust_CheckedChanged);
             // 
             // AutoAdjust
             // 
@@ -195,6 +201,7 @@
             this.AutoAdjust.TabStop = true;
             this.AutoAdjust.Text = "自动矫正";
             this.AutoAdjust.UseVisualStyleBackColor = true;
+            this.AutoAdjust.CheckedChanged += new System.EventHandler(this.AutoAdjust_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -235,6 +242,7 @@
             this.radioBin.TabStop = true;
             this.radioBin.Text = "黑白";
             this.radioBin.UseVisualStyleBackColor = true;
+            this.radioBin.CheckedChanged += new System.EventHandler(this.radioColor_CheckedChanged);
             // 
             // radioGray
             // 
@@ -247,6 +255,7 @@
             this.radioGray.TabStop = true;
             this.radioGray.Text = "灰度";
             this.radioGray.UseVisualStyleBackColor = true;
+            this.radioGray.CheckedChanged += new System.EventHandler(this.radioColor_CheckedChanged);
             // 
             // radioColor
             // 
@@ -259,6 +268,7 @@
             this.radioColor.TabStop = true;
             this.radioColor.Text = "彩色";
             this.radioColor.UseVisualStyleBackColor = true;
+            this.radioColor.CheckedChanged += new System.EventHandler(this.radioColor_CheckedChanged);
             // 
             // btnCapture
             // 
@@ -338,6 +348,18 @@
             this.comboBox1.TabIndex = 12;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnBrowse.Location = new System.Drawing.Point(299, 42);
+            this.btnBrowse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(63, 32);
+            this.btnBrowse.TabIndex = 1;
+            this.btnBrowse.Text = "……";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -400,13 +422,15 @@
         private System.Windows.Forms.RadioButton radioColor;
         private System.Windows.Forms.Button btnCapture;
         private System.Windows.Forms.Button btnConfig;
-        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Button btnWatch;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer camtimer;
         private System.Windows.Forms.PictureBox picMain;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnVideoConfig;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button btnBrowse;
     }
 }
 
