@@ -84,7 +84,7 @@
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(1233, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 27);
+            this.label1.Size = new System.Drawing.Size(106, 21);
             this.label1.TabIndex = 1;
             this.label1.Text = "摄像头选择：";
             // 
@@ -94,7 +94,7 @@
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(1154, 887);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 27);
+            this.label2.Size = new System.Drawing.Size(74, 21);
             this.label2.TabIndex = 1;
             this.label2.Text = "曝光度：";
             this.label2.Visible = false;
@@ -105,7 +105,7 @@
             this.tbExposure.Location = new System.Drawing.Point(1238, 891);
             this.tbExposure.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbExposure.Name = "tbExposure";
-            this.tbExposure.Size = new System.Drawing.Size(192, 56);
+            this.tbExposure.Size = new System.Drawing.Size(192, 45);
             this.tbExposure.TabIndex = 2;
             this.tbExposure.Visible = false;
             // 
@@ -117,7 +117,7 @@
             this.cbExposure.Location = new System.Drawing.Point(1436, 890);
             this.cbExposure.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbExposure.Name = "cbExposure";
-            this.cbExposure.Size = new System.Drawing.Size(74, 31);
+            this.cbExposure.Size = new System.Drawing.Size(61, 25);
             this.cbExposure.TabIndex = 3;
             this.cbExposure.Text = "自动";
             this.cbExposure.UseVisualStyleBackColor = true;
@@ -180,7 +180,7 @@
             this.tbResultPath.Location = new System.Drawing.Point(19, 41);
             this.tbResultPath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbResultPath.Name = "tbResultPath";
-            this.tbResultPath.Size = new System.Drawing.Size(278, 34);
+            this.tbResultPath.Size = new System.Drawing.Size(278, 29);
             this.tbResultPath.TabIndex = 0;
             // 
             // groupBox2
@@ -203,7 +203,7 @@
             this.NoAdjust.Location = new System.Drawing.Point(204, 74);
             this.NoAdjust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NoAdjust.Name = "NoAdjust";
-            this.NoAdjust.Size = new System.Drawing.Size(93, 31);
+            this.NoAdjust.Size = new System.Drawing.Size(76, 25);
             this.NoAdjust.TabIndex = 0;
             this.NoAdjust.TabStop = true;
             this.NoAdjust.Text = "不矫正";
@@ -216,7 +216,7 @@
             this.AutoAdjust.Location = new System.Drawing.Point(55, 74);
             this.AutoAdjust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AutoAdjust.Name = "AutoAdjust";
-            this.AutoAdjust.Size = new System.Drawing.Size(113, 31);
+            this.AutoAdjust.Size = new System.Drawing.Size(92, 25);
             this.AutoAdjust.TabIndex = 0;
             this.AutoAdjust.TabStop = true;
             this.AutoAdjust.Text = "自动矫正";
@@ -257,7 +257,7 @@
             this.radioBin.Location = new System.Drawing.Point(224, 58);
             this.radioBin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioBin.Name = "radioBin";
-            this.radioBin.Size = new System.Drawing.Size(73, 31);
+            this.radioBin.Size = new System.Drawing.Size(60, 25);
             this.radioBin.TabIndex = 0;
             this.radioBin.TabStop = true;
             this.radioBin.Text = "黑白";
@@ -270,7 +270,7 @@
             this.radioGray.Location = new System.Drawing.Point(127, 58);
             this.radioGray.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioGray.Name = "radioGray";
-            this.radioGray.Size = new System.Drawing.Size(73, 31);
+            this.radioGray.Size = new System.Drawing.Size(60, 25);
             this.radioGray.TabIndex = 0;
             this.radioGray.TabStop = true;
             this.radioGray.Text = "灰度";
@@ -283,7 +283,7 @@
             this.radioColor.Location = new System.Drawing.Point(31, 58);
             this.radioColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioColor.Name = "radioColor";
-            this.radioColor.Size = new System.Drawing.Size(73, 31);
+            this.radioColor.Size = new System.Drawing.Size(60, 25);
             this.radioColor.TabIndex = 0;
             this.radioColor.TabStop = true;
             this.radioColor.Text = "彩色";

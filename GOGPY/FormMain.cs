@@ -54,7 +54,7 @@ namespace GOGPY
         public FormMain()
         {
             InitializeComponent();
-          
+            InitVideoDevice();
             //传值
             formconfig.fatherForm = this;
             b_take_picture = false;
@@ -118,7 +118,7 @@ namespace GOGPY
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            camtimer.Enabled = true;
+            
             string strSavePath = null;
           
 
@@ -190,7 +190,7 @@ namespace GOGPY
 
         }
 
-        //点击显示图片按牛牛
+        //点击显示图片按钮
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             //首先隐藏，然后显示，确保的确能够被看到
@@ -236,10 +236,9 @@ namespace GOGPY
                 Marshal.FreeCoTaskMem(m_ip);
                 m_ip = IntPtr.Zero;
             }
-            else 
-            {
-                return;//空的情况，肯定是退出
-            }
+
+            if (cam == null)
+                return;//必须的异常处理
 
             // capture image
             try
@@ -250,7 +249,7 @@ namespace GOGPY
             {
                 //do nothing,允许丢帧 TODO：是否改成继承上一帧更好
             }
-            
+
             Bitmap b = new Bitmap(cam.Width, cam.Height, cam.Stride, PixelFormat.Format24bppRgb, m_ip);
 
             // If the image is upsidedown
@@ -309,6 +308,79 @@ namespace GOGPY
             MessageBox.Show("摄像头设置功能稍后提供……");
             //formconfig.Visible = true;
         }
+
+        //打开并设置目录
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                inifilehelper.IniWriteValue("保存配置", "图片存放目录", tbResultPath.Text);
+                MessageBox.Show("图片存放目录保存成功！");
+                //读取现有图片
+                UpdateFileList();
+            }
+            catch
+            {
+                MessageBox.Show("图片存放目录保存失败！");
+            }
+
+
+
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.ShowDialog();
+            string strPath = folderBrowserDialog1.SelectedPath;
+            tbResultPath.Text = strPath;
+        }
+
+        //打开图像
+        private void btnWatch_Click(object sender, EventArgs e)
+        {
+            //打开目录
+            if (Directory.Exists(tbResultPath.Text))
+            {
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                proc.StartInfo.FileName = tbResultPath.Text;
+                proc.StartInfo.UseShellExecute = true;
+                proc.Start();
+            }
+        }
+
+        //设定矫正
+        private void AutoAdjust_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AutoAdjust.Checked == true)
+            {
+                inifilehelper.IniWriteValue("矫正方式", "矫正", "true");
+
+            }
+            else
+            {
+                inifilehelper.IniWriteValue("矫正方式", "矫正", "false");
+            }
+        }
+
+        //设定颜色
+        private void radioColor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioColor.Checked == true)
+            {
+                inifilehelper.IniWriteValue("拍摄类型", "拍摄类型", "彩色");
+            }
+            else if (radioGray.Checked == true)
+            {
+                inifilehelper.IniWriteValue("拍摄类型", "拍摄类型", "灰度");
+            }
+            else
+            {
+                inifilehelper.IniWriteValue("拍摄类型", "拍摄类型", "二值");
+            }
+        }
+
+      
         #endregion
       
         #region helper函数
@@ -446,95 +518,27 @@ namespace GOGPY
         //选择视频设备
         public void InitVideoDevice()
         {
+            if (cam != null)
+                cam.Dispose();
+            //读取参数
+            string strTmp = inifilehelper.IniReadValue("视频采集", "摄像头序号");
+            int VIDEODEVICE = Convert.ToInt32(strTmp); // zero based index of video capture device to use
+            const int VIDEOWIDTH = 1024;// 是用默认（最大）分辨率
+            const int VIDEOHEIGHT = 768; // Depends on video device caps
+            const int VIDEOBITSPERPIXEL = 24; // BitsPerPixel values determined by device
             try
             {
-                if (cam != null)
-                    cam.Dispose();
-                //读取参数
-                string strTmp = inifilehelper.IniReadValue("视频采集", "摄像头序号");
-                int VIDEODEVICE = Convert.ToInt32(strTmp); // zero based index of video capture device to use
-                const int VIDEOWIDTH = 1024;// 是用默认（最大）分辨率
-                const int VIDEOHEIGHT = 768; // Depends on video device caps
-                const int VIDEOBITSPERPIXEL = 24; // BitsPerPixel values determined by device
                 cam = new Capture(VIDEODEVICE, VIDEOWIDTH, VIDEOHEIGHT, VIDEOBITSPERPIXEL, picMain);
             }
             catch
             {
-                MessageBox.Show("摄像头打开错误，请首先确保摄像头连接并至少支持1024*768分辨率！");
+                MessageBox.Show("摄像头打开错误，尝试以640*480分辨率进行打开");
+                cam = new Capture(VIDEODEVICE, 640, 480, VIDEOBITSPERPIXEL, picMain);
             }
         }
         #endregion
 
-        //打开并设置目录
-        private void btnSetting_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-                inifilehelper.IniWriteValue("保存配置", "图片存放目录", tbResultPath.Text);
-                MessageBox.Show("图片存放目录保存成功！");
-                //读取现有图片
-                UpdateFileList();
-            }
-            catch 
-            {
-                MessageBox.Show("图片存放目录保存失败！");
-            }
-           
-
-
-        }
-
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.ShowDialog();
-            string strPath = folderBrowserDialog1.SelectedPath;
-            tbResultPath.Text = strPath;
-        }
-
-        //打开图像
-        private void btnWatch_Click(object sender, EventArgs e)
-        {
-            //打开目录
-            if (Directory.Exists(tbResultPath.Text))
-            {
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.StartInfo.FileName = tbResultPath.Text;
-                proc.StartInfo.UseShellExecute = true;
-                proc.Start();  
-            }
-        }
-
-        //设定矫正
-        private void AutoAdjust_CheckedChanged(object sender, EventArgs e)
-        {
-            if (AutoAdjust.Checked == true)
-            {
-                inifilehelper.IniWriteValue("矫正方式", "矫正","true");
-
-            }
-            else 
-            {
-                inifilehelper.IniWriteValue("矫正方式", "矫正", "false");
-            }
-        }
-
-        //设定颜色
-        private void radioColor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioColor.Checked == true)
-            {
-                inifilehelper.IniWriteValue("拍摄类型", "拍摄类型", "彩色");
-            }
-            else if (radioGray.Checked == true)
-            {
-                inifilehelper.IniWriteValue("拍摄类型", "拍摄类型", "灰度");
-            }
-            else 
-            {
-                inifilehelper.IniWriteValue("拍摄类型", "拍摄类型", "二值");
-            }
-        }
+ 
 
        
     }

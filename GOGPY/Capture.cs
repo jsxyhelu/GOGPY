@@ -371,6 +371,7 @@ namespace GOGPY
         }
 
         // Set the video window within the control specified by hControl
+        // 将显示的结果，放置在你需要显示的控件中去
         private void ConfigVideoWindow(Control hControl)
         {
             int hr;
