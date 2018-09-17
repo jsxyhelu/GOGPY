@@ -236,6 +236,10 @@ namespace GOGPY
                 Marshal.FreeCoTaskMem(m_ip);
                 m_ip = IntPtr.Zero;
             }
+            else 
+            {
+                return;//空的情况，肯定是退出
+            }
 
             // capture image
             try
