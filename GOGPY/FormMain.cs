@@ -193,9 +193,11 @@ namespace GOGPY
         //点击显示图片按牛牛
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            //首先隐藏，然后显示，确保的确能够被看到
+            formshow.Visible = false;
             PictureBox pb = (PictureBox)sender;
             formshow.showImage(pb.Image);
-            formshow.Visible = true;
+            formshow.Visible = true; 
         }
 
         //关闭并打开摄像头
