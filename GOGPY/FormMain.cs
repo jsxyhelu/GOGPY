@@ -40,7 +40,6 @@ namespace GOGPY
         private Capture cam;
         List<PictureBox> listPictureBox; //控件集合
         IntPtr m_ip = IntPtr.Zero;
-        Image srcImage;
         FormConfig formconfig = new FormConfig();
         FormShow formshow = new FormShow();
 
@@ -48,13 +47,102 @@ namespace GOGPY
         bool b_take_picture;
 
         GOClrClass client = new GOClrClass();
+
+        Thread threadMain;
         #endregion
       
         #region 事件驱动
+        //主要图像采集和处理线程
+        private void ThreadRun()
+        {
+            while (true)
+            {
+                if (m_ip != IntPtr.Zero)
+                {
+                    Marshal.FreeCoTaskMem(m_ip);
+                    m_ip = IntPtr.Zero;
+                }
+
+                if (cam == null)
+                    continue;//必须的异常处理
+
+                // capture image
+                try
+                {
+                    m_ip = cam.Click();
+                }
+                catch
+                {
+                    continue;//继续下副图像的采集
+                }
+
+                Bitmap b = new Bitmap(cam.Width, cam.Height, cam.Stride, PixelFormat.Format24bppRgb, m_ip);
+
+                //// If the image is upsidedown
+                b.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                //调用clr+opencv图像处理模块
+                MemoryStream ms = new MemoryStream();
+                b.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                byte[] bytes = ms.GetBuffer();
+                Bitmap bitmap = client.testMethod(bytes);
+                if (bitmap == null) //必要的控制 
+                    continue;
+                if (b_take_picture == true)
+                {
+                    bool bifAjust = true;
+                    int imethod = 0;
+                    if (NoAdjust.Checked)
+                        bifAjust = false;
+                    if (radioGray.Checked)
+                        imethod = 1;
+                    if (radioBin.Checked)
+                        imethod = 2;
+                    Bitmap bitmap2 = client.fetchresult(bytes, bifAjust, imethod);
+                    if (bitmap2 == null)
+                    {
+                        MessageBox.Show("图像获取错误!请重新获取");
+                    }
+                    else
+                    {
+                        string strPath;
+                        if (Directory.Exists(tbResultPath.Text))
+                        {
+                            strPath = tbResultPath.Text;
+                        }
+                        else
+                        {
+                            strPath = Application.StartupPath;
+                        }
+                        //保存这个图像
+                        bitmap2.Save(strPath + "/" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                        b_take_picture = false;
+                        //更新左下方文件目录
+                        UpdateFileList();
+                    }
+                }
+                //显示结果
+                try
+                {
+                    picPreview.Image = bitmap;
+                }
+                catch
+                {
+                    continue;
+                }
+              
+            }
+        }
         public FormMain()
         {
             InitializeComponent();
             InitVideoDevice();
+            //开启线程
+            if (threadMain == null)
+            {
+                this.threadMain = new Thread(this.ThreadRun);
+            }
+            this.threadMain.IsBackground = true;//程序退出的时候，主动退出线程
+            this.threadMain.Start();
             //传值
             formconfig.fatherForm = this;
             b_take_picture = false;
@@ -96,6 +184,7 @@ namespace GOGPY
                 Marshal.FreeCoTaskMem(m_ip);
                 m_ip = IntPtr.Zero;
             }
+            this.threadMain.Abort();
         }
         private void btnCapture_Click(object sender, EventArgs e)
         {
@@ -120,8 +209,6 @@ namespace GOGPY
         {
             
             string strSavePath = null;
-          
-
             //设置图片保存位置
             try
             {
@@ -205,7 +292,6 @@ namespace GOGPY
         {
             int itmp = comboBox1.SelectedIndex;
             inifilehelper.IniWriteValue("视频采集", "摄像头序号", itmp.ToString());
-            camtimer.Enabled = false;
             //选择视频设备
             InitVideoDevice();
             //生成配套的视频控制界面
@@ -217,7 +303,6 @@ namespace GOGPY
             //Create the filter for the selected video input device
             string devicepath = comboBox1.SelectedItem.ToString();
             theDevice = CreateFilter(FilterCategory.VideoInputDevice, devicepath);
-            camtimer.Enabled = true;
         }
 
         //视频设置
@@ -226,83 +311,6 @@ namespace GOGPY
             DisplayPropertyPage(theDevice);
         }
 
-        //尝试使用timer，解决实时显示问题
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            
-            // Release any previous buffer
-            if (m_ip != IntPtr.Zero)
-            {
-                Marshal.FreeCoTaskMem(m_ip);
-                m_ip = IntPtr.Zero;
-            }
-
-            if (cam == null)
-                return;//必须的异常处理
-
-            // capture image
-            try
-            {
-                m_ip = cam.Click();
-            }
-            catch
-            {
-                //do nothing,允许丢帧 TODO：是否改成继承上一帧更好
-            }
-
-            Bitmap b = new Bitmap(cam.Width, cam.Height, cam.Stride, PixelFormat.Format24bppRgb, m_ip);
-
-            // If the image is upsidedown
-            b.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            srcImage = b;
-            if (picPreview.Image != null)
-                picPreview.Image.Dispose();
-
-            //调用clr+opencv图像处理模块
-            MemoryStream ms = new MemoryStream();
-            b.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-            byte[] bytes = ms.GetBuffer();
-            Bitmap bitmap = client.testMethod(bytes);
-
-            Bitmap bitmap2;
-            if (b_take_picture == true)
-            {
-                bool bifAjust = true;
-                int imethod = 0;
-                if (NoAdjust.Checked)
-                    bifAjust = false;
-                if (radioGray.Checked)
-                    imethod = 1;
-                if (radioBin.Checked)
-                    imethod = 2;
-                bitmap2 = client.fetchresult(bytes, bifAjust, imethod);
-                if (bitmap2 == null)
-                {
-                    MessageBox.Show("图像获取错误!请重新获取");
-                }
-                else
-                {
-                    string strPath;
-                    if (Directory.Exists(tbResultPath.Text))
-                    {
-                        strPath = tbResultPath.Text;
-                    }
-                    else
-                    {
-                        strPath = Application.StartupPath;
-                    }
-                    //保存这个图像
-                    bitmap2.Save(strPath + "/" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                    b_take_picture = false;
-                   // MessageBox.Show("图像采集成功！");
-                    //更新左下方文件目录
-                    UpdateFileList();
-                }
-            }
-            //显示结果
-            picPreview.Image = bitmap;
-        }
-        //打开设置界面
         private void btnConfig_Click(object sender, EventArgs e)
         {
             MessageBox.Show("摄像头设置功能稍后提供……");
@@ -312,7 +320,6 @@ namespace GOGPY
         //打开并设置目录
         private void btnSetting_Click(object sender, EventArgs e)
         {
-
             try
             {
                 inifilehelper.IniWriteValue("保存配置", "图片存放目录", tbResultPath.Text);
@@ -324,9 +331,6 @@ namespace GOGPY
             {
                 MessageBox.Show("图片存放目录保存失败！");
             }
-
-
-
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -537,9 +541,6 @@ namespace GOGPY
             }
         }
         #endregion
-
- 
-
        
     }
 }

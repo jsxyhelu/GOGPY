@@ -21,7 +21,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.picPreview = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,7 +43,6 @@
             this.btnCapture = new System.Windows.Forms.Button();
             this.btnConfig = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.camtimer = new System.Windows.Forms.Timer(this.components);
             this.picMain = new System.Windows.Forms.PictureBox();
             this.btnVideoConfig = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -333,11 +331,6 @@
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // camtimer
-            // 
-            this.camtimer.Interval = 50;
-            this.camtimer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
             // picMain
             // 
             this.picMain.Image = ((System.Drawing.Image)(resources.GetObject("picMain.Image")));
@@ -347,7 +340,6 @@
             this.picMain.Size = new System.Drawing.Size(413, 376);
             this.picMain.TabIndex = 5;
             this.picMain.TabStop = false;
-            this.picMain.Visible = false;
             // 
             // btnVideoConfig
             // 
@@ -493,7 +485,6 @@
         private System.Windows.Forms.Button btnConfig;
         private System.Windows.Forms.Button btnWatch;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Timer camtimer;
         private System.Windows.Forms.PictureBox picMain;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnVideoConfig;
