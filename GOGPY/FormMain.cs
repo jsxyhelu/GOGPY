@@ -77,7 +77,7 @@ namespace GOGPY
                 }
 
                 Bitmap b = new Bitmap(cam.Width, cam.Height, cam.Stride, PixelFormat.Format24bppRgb, m_ip);
-
+             
                 //// If the image is upsidedown
                 b.RotateFlip(RotateFlipType.RotateNoneFlipY);
                 //调用clr+opencv图像处理模块
@@ -129,7 +129,8 @@ namespace GOGPY
                 {
                     continue;
                 }
-              
+            //施放资源  
+            b.Dispose();
             }
         }
         public FormMain()

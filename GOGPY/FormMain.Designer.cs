@@ -340,6 +340,7 @@
             this.picMain.Size = new System.Drawing.Size(413, 376);
             this.picMain.TabIndex = 5;
             this.picMain.TabStop = false;
+            this.picMain.Visible = false;
             // 
             // btnVideoConfig
             // 
